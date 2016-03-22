@@ -13,22 +13,27 @@
 @interface YTSideMenuVC () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
+@property (strong, nonnull) NSArray* menu;
 
 @end
 
 @implementation YTSideMenuVC
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.menu = @[
+                  @{@"vcID": @"YTMainVC", @"menuTitle": @"main View"},
+                  @{@"vcID": @"secondVC", @"menuTitle": @"second View"},
+                  @{@"vcID": @"thirdVC", @"menuTitle": @"Map VC"}
+                ];
+    
+}
+
 #pragma mark - UITableViewDataSource
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [NSString stringWithFormat:@"Section %ld", (long)section];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+
+    return [self.menu count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -40,7 +45,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Item %ld", (long)indexPath.row];
+    cell.textLabel.text = [[self.menu objectAtIndex:indexPath.row] valueForKey:@"menuTitle"];
     
     return cell;
 }
@@ -48,11 +53,15 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    YTMainVC *mainVC = [self.storyboard instantiateViewControllerWithIdentifier:@"YTMainVC"];
-    mainVC.title = [NSString stringWithFormat:@"Demo #%ld-%ld", (long)indexPath.section, (long)indexPath.row];
+    
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[[self.menu objectAtIndex:indexPath.row] valueForKey:@"vcID"]];
+    vc.title = [NSString stringWithFormat:@"Demo #%ld-%ld", (long)indexPath.section, (long)indexPath.row];
     
     UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
-    NSArray *controllers = [NSArray arrayWithObject:mainVC];
+    
+//    [navigationController pushViewController:vc animated:YES];
+
+    NSArray *controllers = [NSArray arrayWithObject:vc];
     navigationController.viewControllers = controllers;
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
 }
