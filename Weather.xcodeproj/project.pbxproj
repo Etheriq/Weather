@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2916D0ED1CA3392B000EC079 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2916D0EC1CA3392B000EC079 /* CoreLocation.framework */; };
 		29D695DF1CA0B668000753B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D695DE1CA0B668000753B7 /* main.m */; };
 		29D695E21CA0B668000753B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D695E11CA0B668000753B7 /* AppDelegate.m */; };
 		29D695E81CA0B668000753B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D695E61CA0B668000753B7 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		09480E6BDE973C03998B21DB /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
+		2916D0EC1CA3392B000EC079 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		29D695DA1CA0B668000753B7 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D695DE1CA0B668000753B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29D695E01CA0B668000753B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2916D0ED1CA3392B000EC079 /* CoreLocation.framework in Frameworks */,
 				3D354C258BE18B236EF57351 /* Pods_Weather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +160,7 @@
 		C870CE09DAC55EBB5A93ACF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2916D0EC1CA3392B000EC079 /* CoreLocation.framework */,
 				4FD17724698AE2967809B3EA /* Pods_Weather.framework */,
 			);
 			name = Frameworks;
@@ -198,6 +202,11 @@
 					29D695D91CA0B668000753B7 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = V9B3PW8ZEP;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

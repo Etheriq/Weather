@@ -22,6 +22,8 @@
     
 }
 
+# pragma mark - Actions
+
 - (void) showMenuAction {
     [self.menuContainerViewController toggleRightSideMenuCompletion:nil];
 }

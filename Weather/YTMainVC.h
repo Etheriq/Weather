@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MFSideMenu.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface YTMainVC : UIViewController
+@interface YTMainVC : UIViewController <CLLocationManagerDelegate>
 
 - (IBAction)showSideMenuAction:(UIBarButtonItem *)sender;
 
