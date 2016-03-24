@@ -40,7 +40,7 @@ CLLocationManager* locationManager;
 - (void) refreshView {
     
     [locationManager startUpdatingLocation];
-    [[YTRequestManager sharedManager] refreshWeatherDataForCity:@"London" onSuccess:^(NSArray *data) {
+    [[YTRequestManager sharedManager] getCurrentWeatherDataByCity:@"London" onSuccess:^(NSDictionary *data) {
         NSLog(@"%@", data);
     } onFailure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"%@", [error localizedDescription]);

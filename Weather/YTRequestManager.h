@@ -7,11 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface YTRequestManager : NSObject
 
 + (YTRequestManager*) sharedManager;
-- (void) refreshWeatherDataForCity:(NSString*) city
+
+- (void) getCurrentWeatherDataByCity:(NSString*) city
+                         onSuccess:(void(^)(NSDictionary* data)) success
+                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void) getForecastWeatherByCity:(NSString*) city
+                            onSuccess:(void(^)(NSDictionary* data)) success
+                            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
+                            onSuccess:(void(^)(NSArray* data)) success
+                            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
+
+- (void) getForecastWeatherByCoordinates:(CLLocation*) location
                          onSuccess:(void(^)(NSArray* data)) success
                          onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
