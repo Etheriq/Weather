@@ -9,7 +9,7 @@
 #import "YTRequestManager.h"
 #import <AFNetworking/AFNetworking.h>
 
-@interface YTRequestManager ()
+@interface YTRequestManager()
 
 @property(strong, nonatomic) AFHTTPSessionManager* sessionManager;
 
