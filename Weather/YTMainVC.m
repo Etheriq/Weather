@@ -7,6 +7,7 @@
 //
 
 #import "YTMainVC.h"
+#import "YTRequestManager.h"
 
 @interface YTMainVC()
 
@@ -39,6 +40,11 @@ CLLocationManager* locationManager;
 - (void) refreshView {
     
     [locationManager startUpdatingLocation];
+    [[YTRequestManager sharedManager] refreshWeatherDataForCity:@"London" onSuccess:^(NSArray *data) {
+        NSLog(@"%@", data);
+    } onFailure:^(NSError *error, NSInteger statusCode) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
     
     NSLog(@"refresh upd");
     

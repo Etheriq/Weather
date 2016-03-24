@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2916D0ED1CA3392B000EC079 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2916D0EC1CA3392B000EC079 /* CoreLocation.framework */; };
+		29992B781CA41B5900FF6B51 /* YTRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 29992B771CA41B5900FF6B51 /* YTRequestManager.m */; };
 		29D695DF1CA0B668000753B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D695DE1CA0B668000753B7 /* main.m */; };
 		29D695E21CA0B668000753B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D695E11CA0B668000753B7 /* AppDelegate.m */; };
 		29D695E81CA0B668000753B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29D695E61CA0B668000753B7 /* Main.storyboard */; };
@@ -27,6 +28,8 @@
 /* Begin PBXFileReference section */
 		09480E6BDE973C03998B21DB /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 		2916D0EC1CA3392B000EC079 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		29992B761CA41B5900FF6B51 /* YTRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRequestManager.h; sourceTree = "<group>"; };
+		29992B771CA41B5900FF6B51 /* YTRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRequestManager.m; sourceTree = "<group>"; };
 		29D695DA1CA0B668000753B7 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29D695DE1CA0B668000753B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29D695E01CA0B668000753B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 			children = (
 				29D696011CA0BA0C000753B7 /* YTDBManager.h */,
 				29D696021CA0BA0C000753B7 /* YTDBManager.m */,
+				29992B761CA41B5900FF6B51 /* YTRequestManager.h */,
+				29992B771CA41B5900FF6B51 /* YTRequestManager.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				29D695E21CA0B668000753B7 /* AppDelegate.m in Sources */,
 				29D696181CA20438000753B7 /* YTMapVC.m in Sources */,
 				29D695DF1CA0B668000753B7 /* main.m in Sources */,
+				29992B781CA41B5900FF6B51 /* YTRequestManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

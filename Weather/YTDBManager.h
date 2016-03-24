@@ -18,6 +18,6 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
-+ (YTDBManager *) getDefaultManager;
++ (YTDBManager *) sharedManager;
 
 @end

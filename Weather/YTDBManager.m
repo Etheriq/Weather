@@ -13,7 +13,7 @@
 
 #pragma mark - SingleTone Constructor
 
-+ (YTDBManager *) getDefaultManager {
++ (YTDBManager *) sharedManager {
     static YTDBManager* manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
