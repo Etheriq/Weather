@@ -8,6 +8,7 @@
 
 #import "YTRequestManager.h"
 #import <AFNetworking/AFNetworking.h>
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface YTRequestManager()
 
@@ -31,15 +32,19 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
     return manager;
 }
 
--(id)init {
+-(instancetype)init {
     self = [super init];
     if (self) {
+        [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+        
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl] sessionConfiguration:configuration];
     }
     
     return self;
 }
+
+#pragma mark - Weather API methods
 
 - (void) getCurrentWeatherDataByCity:(NSString*) city onSuccess:(void(^)(NSDictionary* data)) success onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
  
