@@ -45,26 +45,9 @@
 
 -(CLLocation*) updateLocation {
     [self.locationManager startUpdatingLocation];
-    [NSThread sleepForTimeInterval:1.0f];
-//    CLLocation* location = nil;
     
-    __block CLLocation* location = nil;
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        while (self.currentLocation != nil) {
-            location = self.currentLocation;
-            
-        }
-        
-    });
-//    while (self.currentLocation != nil) {
-//        location = self.currentLocation;
-//        
-//    }
-    
-    return location;
+    return [self.locationManager location];
 }
-
 
 #pragma mark - CLLocationManagerDelegate
 
@@ -75,7 +58,7 @@
         
         NSLog(@"Coordinates OK");
 //        NSLog(@"lat = %.8f, lng = %.8f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-        self.currentLocation = currentLocation;
+//        self.currentLocation = currentLocation;
         
         [self.locationManager stopUpdatingLocation];
     }
