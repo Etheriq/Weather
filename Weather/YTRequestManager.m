@@ -21,9 +21,15 @@
 static NSString* apikey = @"09c71b13e609e4d0f3dee60245695d46";
 static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
 
+/*
+
+ https://maps.googleapis.com/maps/api/geocode/json?latlng=49.452648,31.950169&result_type=locality|&key=AIzaSyDpRSfqj0r3Zkvr3fcCA-YbrxB8RgS_mvo
+ 
+*/
+
 + (YTRequestManager*) sharedManager {
     static YTRequestManager* manager = nil;
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[YTRequestManager alloc] init];

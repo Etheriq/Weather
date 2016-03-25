@@ -46,6 +46,19 @@
 -(CLLocation*) updateLocation {
     [self.locationManager startUpdatingLocation];
     
+    CLLocation* location = [self.locationManager location];
+    CLGeocoder *ceo = [[CLGeocoder alloc]init];
+    CLLocation *loc = [[CLLocation alloc]initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+    
+    [ceo reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark* place = [placemarks firstObject];
+        NSLog(@"%@", place);
+        
+        
+    }];
+
+    
+    
     return [self.locationManager location];
 }
 
