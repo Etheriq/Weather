@@ -22,7 +22,7 @@
                             onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
-                            onSuccess:(void(^)(NSArray* data)) success
+                            onSuccess:(void(^)(NSDictionary* data)) success
                             onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void) getForecastWeatherByCoordinates:(CLLocation*) location

@@ -21,12 +21,6 @@
 static NSString* apikey = @"09c71b13e609e4d0f3dee60245695d46";
 static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
 
-/*
-
- https://maps.googleapis.com/maps/api/geocode/json?latlng=49.452648,31.950169&result_type=locality|&key=AIzaSyDpRSfqj0r3Zkvr3fcCA-YbrxB8RgS_mvo
- 
-*/
-
 + (YTRequestManager*) sharedManager {
     static YTRequestManager* manager = nil;
 
@@ -103,7 +97,7 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
 }
 
 - (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
-                                  onSuccess:(void(^)(NSArray* data)) success
+                                  onSuccess:(void(^)(NSDictionary* data)) success
                                   onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     NSDictionary* params = @{
                              @"units": @"metric",
@@ -115,10 +109,31 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
     [self.sessionManager GET:@"weather"
                   parameters:params
                     progress:^(NSProgress * downloadProgress) {}
-                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                     success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
                          if (success) {
-                             NSArray* array = @[];
-                             success(array);
+                             
+                             NSLog(@"%@", responseObject);
+                             if ([responseObject[@"cod"] integerValue] == 200) {
+                                 NSDictionary* response = @{
+                                                            @"temp": responseObject[@"main"][@"temp"],
+                                                            @"pressure": responseObject[@"main"][@"pressure"],  // давление в hPa
+                                                            @"humidity": responseObject[@"main"][@"humidity"],  // влажность в %
+                                                            @"speed": responseObject[@"wind"][@"speed"],        // скорость ветра в м/с
+                                                            @"deg": responseObject[@"wind"][@"deg"],            // направление ветра в градусах
+                                                            @"icon": responseObject[@"weather"][0][@"icon"],
+                                                            @"description": responseObject[@"weather"][0][@"description"],
+                                                            @"sunrise": responseObject[@"sys"][@"sunrise"],     // восход в timestamp
+                                                            @"sunset": responseObject[@"sys"][@"sunset"],       // закат в timestamp
+                                                            @"name": responseObject[@"name"],                   // название местности
+                                                            @"message": @"ok"
+                                                            };
+                                 success(response);
+                             } else {
+                                 NSDictionary* response = @{
+                                                            @"message": @"bad"
+                                                            };
+                                 success(response);
+                             }
                          }
                      }
                      failure:^(NSURLSessionDataTask* task, NSError* error) {

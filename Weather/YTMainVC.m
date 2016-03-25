@@ -9,6 +9,7 @@
 #import "YTMainVC.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"
+#import "YTGoogleGeocodeManager.h"
 
 @interface YTMainVC()
 
@@ -17,19 +18,11 @@
 
 @implementation YTMainVC
 
-//CLLocationManager* locationManager;
-
 - (void) viewDidLoad {
     [super viewDidLoad];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshView)];
-    
-//    locationManager = [[CLLocationManager alloc] init];
-//    locationManager.delegate = self;
-//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//    [locationManager requestWhenInUseAuthorization];
-//    
-    
+    [[YTLocationManager sharedManager] updateLocation];
 }
 
 #pragma mark - Actions
@@ -40,30 +33,29 @@
 
 - (void) refreshView {
     
-    CLLocation* ccord = [[YTLocationManager sharedManager] updateLocation];
-    NSLog(@"ZZZ = lat = %.8f, lng = %.8f", ccord.coordinate.latitude, ccord.coordinate.longitude);
+    CLLocation* coord = [[YTLocationManager sharedManager] updateLocation];
+    NSLog(@"ZZZ = lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
     
-    [[YTRequestManager sharedManager] getCurrentWeatherDataByCity:@"London" onSuccess:^(NSDictionary *data) {
-        NSLog(@"%@", data);
+//    [[YTRequestManager sharedManager] getCurrentWeatherDataByCity:@"London" onSuccess:^(NSDictionary *data) {
+//    } onFailure:^(NSError *error, NSInteger statusCode) {
+//        NSLog(@"%@", [error localizedDescription]);
+//    }];
+    [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord onSuccess:^(NSDictionary *data) {
+        
+        if ([data[@"message"] isEqualToString:@"ok"]) {
+            NSLog(@"Weather by ccord %@", data);
+        } else {
+            //  something wrong
+        }
+    } onFailure:^(NSError *error, NSInteger statusCode) {
+        
+    }];
+    
+    [[YTGoogleGeocodeManager sharedManager] getGeocodeInformationByCoordinates:coord onSuccess:^(NSString *info) {
+        NSLog(@"current city is %@", info);
     } onFailure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"%@", [error localizedDescription]);
     }];
-    
-    NSLog(@"refresh upd");
-    
 }
-
-//#pragma mark - CLLocationManagerDelegate
-//
-//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-//    CLLocation *currentLocation = [locations lastObject];
-//    
-//    if (currentLocation != nil) {
-//    
-//        NSLog(@"lat = %.8f, lng = %.8f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-//        
-//        [locationManager stopUpdatingLocation];
-//    }
-//}
 
 @end

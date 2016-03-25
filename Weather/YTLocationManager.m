@@ -11,7 +11,6 @@
 @interface YTLocationManager() <CLLocationManagerDelegate>
 
 @property(strong, nonatomic) CLLocationManager* locationManager;
-@property(strong, nonatomic) CLLocation* currentLocation;
 
 @end
 
@@ -47,19 +46,8 @@
     [self.locationManager startUpdatingLocation];
     
     CLLocation* location = [self.locationManager location];
-    CLGeocoder *ceo = [[CLGeocoder alloc]init];
-    CLLocation *loc = [[CLLocation alloc]initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
     
-    [ceo reverseGeocodeLocation:loc completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        CLPlacemark* place = [placemarks firstObject];
-        NSLog(@"%@", place);
-        
-        
-    }];
-
-    
-    
-    return [self.locationManager location];
+    return location;
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -69,9 +57,7 @@
     
     if (currentLocation != nil) {
         
-        NSLog(@"Coordinates OK");
 //        NSLog(@"lat = %.8f, lng = %.8f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-//        self.currentLocation = currentLocation;
         
         [self.locationManager stopUpdatingLocation];
     }
