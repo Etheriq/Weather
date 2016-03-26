@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zPB-wJ-Bhj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zPB-wJ-Bhj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--MainVC-->
@@ -16,7 +17,94 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWF-Mg-F6e">
+                                <rect key="frame" x="26" y="84" width="43" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="G6D-T8-Rge"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="70"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsW-i8-ggA" userLabel="I0">
+                                <rect key="frame" x="26" y="196" width="100" height="18"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXt-w3-s4Q">
+                                <rect key="frame" x="26" y="224" width="73" height="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gj-ga-iL0">
+                                <rect key="frame" x="74" y="84" width="37" height="36"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.56082297120000002" green="0.56082297120000002" blue="0.56082297120000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sunset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzu-8x-fQd">
+                                <rect key="frame" x="26" y="334" width="55" height="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sunrise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdU-bT-VXg">
+                                <rect key="frame" x="26" y="306" width="64" height="18"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGI-t2-pQg">
+                                <rect key="frame" x="26" y="279" width="46" height="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIp-eP-x4d">
+                                <rect key="frame" x="26" y="251" width="73" height="18"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uje-kX-NNq">
+                                <rect key="frame" x="26" y="169" width="323" height="17"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MdU-bT-VXg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="0Zh-rR-ehE"/>
+                            <constraint firstItem="mzu-8x-fQd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="2Md-JN-IRz"/>
+                            <constraint firstItem="lsW-i8-ggA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="50b-2m-Ro3"/>
+                            <constraint firstItem="uje-kX-NNq" firstAttribute="top" secondItem="cWF-Mg-F6e" secondAttribute="bottom" constant="10" id="53s-B5-fXd"/>
+                            <constraint firstItem="lsW-i8-ggA" firstAttribute="top" secondItem="cWF-Mg-F6e" secondAttribute="bottom" constant="10" id="JzB-ld-o80"/>
+                            <constraint firstItem="8gj-ga-iL0" firstAttribute="leading" secondItem="cWF-Mg-F6e" secondAttribute="trailing" constant="5" id="NQG-Kn-tVK"/>
+                            <constraint firstItem="cWF-Mg-F6e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="UOd-Jc-G4R"/>
+                            <constraint firstItem="vGI-t2-pQg" firstAttribute="top" secondItem="fIp-eP-x4d" secondAttribute="bottom" constant="10" id="XpK-FH-dgd"/>
+                            <constraint firstItem="UXt-w3-s4Q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="dZw-8y-4w2"/>
+                            <constraint firstItem="lsW-i8-ggA" firstAttribute="top" secondItem="uje-kX-NNq" secondAttribute="bottom" constant="10" id="eAV-2e-7xn"/>
+                            <constraint firstItem="UXt-w3-s4Q" firstAttribute="top" secondItem="lsW-i8-ggA" secondAttribute="bottom" constant="10" id="gYe-YR-Umm"/>
+                            <constraint firstItem="fIp-eP-x4d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="i5d-SG-jrR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uje-kX-NNq" secondAttribute="trailing" constant="10" id="kP8-DU-O32"/>
+                            <constraint firstItem="uje-kX-NNq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="n7b-EI-wPd"/>
+                            <constraint firstItem="mzu-8x-fQd" firstAttribute="top" secondItem="MdU-bT-VXg" secondAttribute="bottom" constant="10" id="qWf-WW-MjL"/>
+                            <constraint firstItem="fIp-eP-x4d" firstAttribute="top" secondItem="UXt-w3-s4Q" secondAttribute="bottom" constant="10" id="ql2-aJ-2s4"/>
+                            <constraint firstItem="8gj-ga-iL0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="viA-TV-LAE"/>
+                            <constraint firstItem="vGI-t2-pQg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="wG0-pO-wE6"/>
+                            <constraint firstItem="MdU-bT-VXg" firstAttribute="top" secondItem="vGI-t2-pQg" secondAttribute="bottom" constant="10" id="y9E-d0-wTP"/>
+                            <constraint firstItem="cWF-Mg-F6e" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="zRj-cy-dh3"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="JzB-ld-o80"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="phj-38-SVM">
                         <barButtonItem key="rightBarButtonItem" image="menu-icon" id="Nxa-bP-oKa">
@@ -26,6 +114,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="cityLabel" destination="uje-kX-NNq" id="Y8A-c6-2Ej"/>
+                        <outlet property="descriptionLabel" destination="lsW-i8-ggA" id="0Wv-NE-EI4"/>
+                        <outlet property="humidityLabel" destination="UXt-w3-s4Q" id="Ugj-cE-rxt"/>
+                        <outlet property="pressureLabel" destination="fIp-eP-x4d" id="RDi-AV-fMW"/>
+                        <outlet property="speedLabel" destination="vGI-t2-pQg" id="YVL-FR-zKW"/>
+                        <outlet property="sunriseLabel" destination="MdU-bT-VXg" id="kkj-aJ-LYu"/>
+                        <outlet property="sunsetLabel" destination="mzu-8x-fQd" id="3dA-h4-dVn"/>
+                        <outlet property="tempLabel" destination="cWF-Mg-F6e" id="WpR-yQ-YFu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,7 +144,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map vc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzS-11-DRK">
                                 <rect key="frame" x="160" y="324" width="56" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -77,7 +175,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="secondVC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-CG-4bb">
                                 <rect key="frame" x="148" y="324" width="79" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
