@@ -36,19 +36,12 @@
     CLLocation* coord = [[YTLocationManager sharedManager] updateLocation];
     NSLog(@"ZZZ = lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
     
-//    [[YTRequestManager sharedManager] getCurrentWeatherDataByCity:@"London" onSuccess:^(NSDictionary *data) {
-//    } onFailure:^(NSError *error, NSInteger statusCode) {
-//        NSLog(@"%@", [error localizedDescription]);
-//    }];
-    [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord onSuccess:^(NSDictionary *data) {
-        
-        if ([data[@"message"] isEqualToString:@"ok"]) {
+    [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord
+       onSuccess:^(NSDictionary *data) {
             NSLog(@"Weather by ccord %@", data);
-        } else {
-            //  something wrong
-        }
-    } onFailure:^(NSError *error, NSInteger statusCode) {
-        
+       }
+       onFailure:^(NSError *error, NSInteger statusCode) {
+           NSLog(@"%@", [error localizedDescription]);
     }];
     
     [[YTGoogleGeocodeManager sharedManager] getGeocodeInformationByCoordinates:coord onSuccess:^(NSString *info) {
@@ -56,6 +49,20 @@
     } onFailure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"%@", [error localizedDescription]);
     }];
+    
+    
+    /*
+     convert timestamp to nsdate and formatter
+     
+     NSString * timeStampString =@"1304245000";
+     NSTimeInterval _interval=[timeStampString doubleValue];
+     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+     NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+     [_formatter setDateFormat:@"dd.MM.yyyy"];
+     NSString *_date=[_formatter stringFromDate:date];
+     
+     */
+    
 }
 
 @end

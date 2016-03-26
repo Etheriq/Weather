@@ -111,8 +111,7 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                     progress:^(NSProgress * downloadProgress) {}
                      success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
                          if (success) {
-                             
-                             NSLog(@"%@", responseObject);
+//                             NSLog(@"%@", responseObject);
                              if ([responseObject[@"cod"] integerValue] == 200) {
                                  NSDictionary* response = @{
                                                             @"temp": responseObject[@"main"][@"temp"],
@@ -125,14 +124,13 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                                                             @"sunrise": responseObject[@"sys"][@"sunrise"],     // восход в timestamp
                                                             @"sunset": responseObject[@"sys"][@"sunset"],       // закат в timestamp
                                                             @"name": responseObject[@"name"],                   // название местности
-                                                            @"message": @"ok"
-                                                            };
+                                                        };
                                  success(response);
                              } else {
-                                 NSDictionary* response = @{
-                                                            @"message": @"bad"
-                                                            };
-                                 success(response);
+                                 NSError* error = [[NSError alloc] initWithDomain:@"geocodeError" code:100 userInfo:nil];
+                                 if (failure) {
+                                     failure(error, 404);
+                                 }
                              }
                          }
                      }
