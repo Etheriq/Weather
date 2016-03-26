@@ -7,9 +7,11 @@
 //
 
 #import "YTMainVC.h"
+#import "YTDBManager.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"
 #import "YTGoogleGeocodeManager.h"
+#import "CurrentWeather.h"
 
 @interface YTMainVC()
 
@@ -38,7 +40,11 @@
     
     [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord
        onSuccess:^(NSDictionary *data) {
-            NSLog(@"Weather by ccord %@", data);
+           
+           CurrentWeather* currentWeather = [[YTDBManager sharedManager] updateCurrentWeatherForToday:data];
+           
+           NSLog(@"Weather data by ccord %@", data);
+           NSLog(@"Weather object by ccord %@", currentWeather);
        }
        onFailure:^(NSError *error, NSInteger statusCode) {
            NSLog(@"%@", [error localizedDescription]);
@@ -49,7 +55,6 @@
     } onFailure:^(NSError *error, NSInteger statusCode) {
         NSLog(@"%@", [error localizedDescription]);
     }];
-    
     
     /*
      convert timestamp to nsdate and formatter

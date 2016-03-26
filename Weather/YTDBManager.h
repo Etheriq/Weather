@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "CurrentWeather.h"
 
 @interface YTDBManager : NSObject
 
@@ -19,5 +20,7 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 + (YTDBManager *) sharedManager;
+
+- (CurrentWeather*) updateCurrentWeatherForToday: (NSDictionary*) data;
 
 @end

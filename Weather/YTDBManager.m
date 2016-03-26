@@ -25,7 +25,45 @@
 
 #pragma mark - Queries
 
-
+- (CurrentWeather*) updateCurrentWeatherForToday: (NSDictionary*) data {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:[[CurrentWeather class] description] inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:description];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:[NSDate date]];
+    comps.hour = 0;
+    comps.minute = 0;
+    comps.second = 0;
+    NSDate *date = [calendar dateFromComponents:comps];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"createdAt = %@", date];
+    [request setPredicate:predicate];
+    
+    NSError *errorReq = nil;
+    NSArray *res = nil;
+    
+    if (!(res = [self.managedObjectContext executeFetchRequest:request error:&errorReq])) {
+        NSLog(@"Get all current Weather error: %@", [errorReq localizedDescription]);
+    }
+    
+    CurrentWeather* currentWeather = nil;
+    if ([res count] > 0) {
+        currentWeather = [res firstObject];
+        [currentWeather initWithCurrentWeatherDictionary:data];
+    } else {
+        currentWeather = [NSEntityDescription insertNewObjectForEntityForName:[[CurrentWeather class] description] inManagedObjectContext:self.managedObjectContext];
+        [currentWeather initWithCurrentWeatherDictionary:data];
+    }
+    
+    NSError *err = nil;
+    if(![self.managedObjectContext save:&err]){
+        NSLog(@"%@", [err localizedDescription]);
+    }
+    
+    return currentWeather;
+}
 
 #pragma mark - Core Data stack
 

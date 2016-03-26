@@ -24,6 +24,8 @@
 		29D696151CA0C39F000753B7 /* YTSideMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D696141CA0C39F000753B7 /* YTSideMenuVC.m */; };
 		29D696181CA20438000753B7 /* YTMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D696171CA20438000753B7 /* YTMapVC.m */; };
 		29DE6D001CA49B130055BB6C /* YTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DE6CFF1CA49B130055BB6C /* YTLocationManager.m */; };
+		29EC4B2C1CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EC4B291CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.m */; };
+		29EC4B2D1CA6A7CB00921839 /* CurrentWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EC4B2B1CA6A7CB00921839 /* CurrentWeather.m */; };
 		3D354C258BE18B236EF57351 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD17724698AE2967809B3EA /* Pods_Weather.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,10 @@
 		29D696171CA20438000753B7 /* YTMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMapVC.m; sourceTree = "<group>"; };
 		29DE6CFE1CA49B130055BB6C /* YTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLocationManager.h; sourceTree = "<group>"; };
 		29DE6CFF1CA49B130055BB6C /* YTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLocationManager.m; sourceTree = "<group>"; };
+		29EC4B281CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CurrentWeather+CoreDataProperties.h"; sourceTree = "<group>"; };
+		29EC4B291CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CurrentWeather+CoreDataProperties.m"; sourceTree = "<group>"; };
+		29EC4B2A1CA6A7CB00921839 /* CurrentWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWeather.h; sourceTree = "<group>"; };
+		29EC4B2B1CA6A7CB00921839 /* CurrentWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeather.m; sourceTree = "<group>"; };
 		4FD17724698AE2967809B3EA /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7401D5038F6FB1863A95A2B /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +104,7 @@
 		29D695DC1CA0B668000753B7 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				29EC4B221CA6A70C00921839 /* Models */,
 				29D6960F1CA0C1B1000753B7 /* ViewControllers */,
 				29D696041CA0BDCC000753B7 /* SideMenu */,
 				29D696001CA0B9D5000753B7 /* Services */,
@@ -161,6 +168,17 @@
 				29D696171CA20438000753B7 /* YTMapVC.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		29EC4B221CA6A70C00921839 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				29EC4B281CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.h */,
+				29EC4B291CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.m */,
+				29EC4B2A1CA6A7CB00921839 /* CurrentWeather.h */,
+				29EC4B2B1CA6A7CB00921839 /* CurrentWeather.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		308FD5D9801D5070049BFF7A /* Pods */ = {
@@ -311,11 +329,13 @@
 			files = (
 				29D695EB1CA0B668000753B7 /* Weather.xcdatamodeld in Sources */,
 				2983BBFF1CA5E91C00FD09AC /* YTGoogleGeocodeManager.m in Sources */,
+				29EC4B2C1CA6A7CB00921839 /* CurrentWeather+CoreDataProperties.m in Sources */,
 				29D696081CA0BE46000753B7 /* MFSideMenuContainerViewController.m in Sources */,
 				29D6960B1CA0BF37000753B7 /* MFSideMenuShadow.m in Sources */,
 				29DE6D001CA49B130055BB6C /* YTLocationManager.m in Sources */,
 				29D696151CA0C39F000753B7 /* YTSideMenuVC.m in Sources */,
 				29D696121CA0C1E0000753B7 /* YTMainVC.m in Sources */,
+				29EC4B2D1CA6A7CB00921839 /* CurrentWeather.m in Sources */,
 				29D696031CA0BA0C000753B7 /* YTDBManager.m in Sources */,
 				29D6960E1CA0C050000753B7 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				29D695E21CA0B668000753B7 /* AppDelegate.m in Sources */,
