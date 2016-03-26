@@ -24,5 +24,7 @@
 @dynamic sunset;
 @dynamic name;
 @dynamic createdAt;
+@dynamic latitude;
+@dynamic longitude;
 
 @end

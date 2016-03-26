@@ -12,8 +12,8 @@
 
 -(void)initWithCurrentWeatherDictionary:(NSDictionary *)data {
 
-    self.temp = [NSNumber numberWithDouble:[[data objectForKey:@"temp"] floatValue]];
-    self.pressure = [NSNumber numberWithDouble:[[data objectForKey:@"pressure"] floatValue]];
+    self.temp = [NSNumber numberWithFloat:[[data objectForKey:@"temp"] floatValue]];
+    self.pressure = [NSNumber numberWithFloat:[[data objectForKey:@"pressure"] floatValue]];
     self.humidity = [NSNumber numberWithInteger:[[data objectForKey:@"humidity"] integerValue]];
     self.speed = [NSNumber numberWithInteger:[[data objectForKey:@"speed"] integerValue]];
     self.windOrientation = [NSNumber numberWithInteger:[[data objectForKey:@"deg"] integerValue]];
@@ -24,6 +24,8 @@
     NSTimeInterval intervalSunset = [[data objectForKey:@"sunset"] doubleValue];
     self.sunset = [NSDate dateWithTimeIntervalSince1970:intervalSunset];
     self.name = [data objectForKey:@"name"];
+    self.latitude = [NSNumber numberWithDouble:[[data objectForKey:@"lat"] doubleValue]];
+    self.longitude = [NSNumber numberWithDouble:[[data objectForKey:@"lng"] doubleValue]];
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:[NSDate date]];

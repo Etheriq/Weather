@@ -44,7 +44,7 @@
            CurrentWeather* currentWeather = [[YTDBManager sharedManager] updateCurrentWeatherForToday:data];
            
            NSLog(@"Weather data by ccord %@", data);
-           NSLog(@"Weather object by ccord %@", currentWeather);
+           NSLog(@"Weather coreData object by ccord %@", currentWeather);
        }
        onFailure:^(NSError *error, NSInteger statusCode) {
            NSLog(@"%@", [error localizedDescription]);
@@ -56,7 +56,7 @@
         NSLog(@"%@", [error localizedDescription]);
     }];
     
-    /*
+/*
      convert timestamp to nsdate and formatter
      
      NSString * timeStampString =@"1304245000";
@@ -66,7 +66,7 @@
      [_formatter setDateFormat:@"dd.MM.yyyy"];
      NSString *_date=[_formatter stringFromDate:date];
      
-     */
+ */
     
 }
 

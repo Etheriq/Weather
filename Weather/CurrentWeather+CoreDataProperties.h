@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *sunset;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSDate *createdAt;
+@property (nullable, nonatomic, retain) NSNumber *latitude;
+@property (nullable, nonatomic, retain) NSNumber *longitude;
 
 @end
 

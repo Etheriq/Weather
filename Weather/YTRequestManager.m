@@ -105,7 +105,7 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                              @"lat": [NSString stringWithFormat:@"%.8f", location.coordinate.latitude],
                              @"lon": [NSString stringWithFormat:@"%.8f", location.coordinate.longitude]
                              };
-    
+
     [self.sessionManager GET:@"weather"
                   parameters:params
                     progress:^(NSProgress * downloadProgress) {}
@@ -124,6 +124,8 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                                                             @"sunrise": responseObject[@"sys"][@"sunrise"],     // восход в timestamp
                                                             @"sunset": responseObject[@"sys"][@"sunset"],       // закат в timestamp
                                                             @"name": responseObject[@"name"],                   // название местности
+                                                            @"lat": params[@"lat"],
+                                                            @"lng": params[@"lon"]
                                                         };
                                  success(response);
                              } else {
