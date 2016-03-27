@@ -27,6 +27,23 @@
 
 - (CurrentWeather*) updateCurrentWeatherForToday: (NSDictionary*) data {
     
+    CurrentWeather *currentWeather = [self getCurrentWeatherForToday];
+    if (currentWeather != nil) {
+        [currentWeather initWithCurrentWeatherDictionary:data];
+    } else {
+        currentWeather = [NSEntityDescription insertNewObjectForEntityForName:[[CurrentWeather class] description] inManagedObjectContext:self.managedObjectContext];
+        [currentWeather initWithCurrentWeatherDictionary:data];
+    }
+    
+    NSError *err = nil;
+    if(![self.managedObjectContext save:&err]){
+        NSLog(@"%@", [err localizedDescription]);
+    }
+    
+    return currentWeather;
+}
+
+- (nullable CurrentWeather*) getCurrentWeatherForToday {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *description = [NSEntityDescription entityForName:[[CurrentWeather class] description] inManagedObjectContext:self.managedObjectContext];
     [request setEntity:description];
@@ -48,18 +65,9 @@
         NSLog(@"Get all current Weather error: %@", [errorReq localizedDescription]);
     }
     
-    CurrentWeather* currentWeather = nil;
+    CurrentWeather *currentWeather = nil;
     if ([res count] > 0) {
         currentWeather = [res firstObject];
-        [currentWeather initWithCurrentWeatherDictionary:data];
-    } else {
-        currentWeather = [NSEntityDescription insertNewObjectForEntityForName:[[CurrentWeather class] description] inManagedObjectContext:self.managedObjectContext];
-        [currentWeather initWithCurrentWeatherDictionary:data];
-    }
-    
-    NSError *err = nil;
-    if(![self.managedObjectContext save:&err]){
-        NSLog(@"%@", [err localizedDescription]);
     }
     
     return currentWeather;

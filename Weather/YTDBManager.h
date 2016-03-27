@@ -22,5 +22,6 @@
 + (YTDBManager *) sharedManager;
 
 - (CurrentWeather*) updateCurrentWeatherForToday: (NSDictionary*) data;
+- (nullable CurrentWeather*) getCurrentWeatherForToday;
 
 @end

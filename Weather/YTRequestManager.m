@@ -77,7 +77,7 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                              @"units": @"metric",
                              @"appid": apikey,
                              @"q": city
-                             };
+                            };
     
     [self.sessionManager GET:@"forecast/weather"
                   parameters:params
@@ -104,14 +104,14 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                              @"appid": apikey,
                              @"lat": [NSString stringWithFormat:@"%.8f", location.coordinate.latitude],
                              @"lon": [NSString stringWithFormat:@"%.8f", location.coordinate.longitude]
-                             };
+                            };
 
     [self.sessionManager GET:@"weather"
                   parameters:params
                     progress:^(NSProgress * downloadProgress) {}
                      success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
                          if (success) {
-                             NSLog(@"%@", responseObject);
+//                             NSLog(@"%@", responseObject);
                              if ([responseObject[@"cod"] integerValue] == 200) {
                                  NSDictionary* response = @{
                                                             @"temp": responseObject[@"main"][@"temp"] ? responseObject[@"main"][@"temp"] : @"0",                    // температура в градусах цельсия
