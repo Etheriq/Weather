@@ -19,9 +19,9 @@
     self.windOrientation = [NSNumber numberWithInteger:[[data objectForKey:@"deg"] integerValue]];
     self.icon = [data objectForKey:@"icon"];
     self.weatherDescription = [data objectForKey:@"description"];
-    NSTimeInterval intervalSunrise = [[data objectForKey:@"sunrise"] doubleValue];
+    NSTimeInterval intervalSunrise = [[data objectForKey:@"sunrise"] integerValue];
     self.sunrise = [NSDate dateWithTimeIntervalSince1970:intervalSunrise];
-    NSTimeInterval intervalSunset = [[data objectForKey:@"sunset"] doubleValue];
+    NSTimeInterval intervalSunset = [[data objectForKey:@"sunset"] integerValue];
     self.sunset = [NSDate dateWithTimeIntervalSince1970:intervalSunset];
     self.name = [data objectForKey:@"name"];
     self.latitude = [NSNumber numberWithDouble:[[data objectForKey:@"lat"] doubleValue]];

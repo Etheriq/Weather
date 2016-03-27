@@ -129,7 +129,7 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                                                         };
                                  success(response);
                              } else {
-                                 NSError* error = [[NSError alloc] initWithDomain:@"geocodeError" code:100 userInfo:nil];
+                                 NSError* error = [[NSError alloc] initWithDomain:@"openweathermap API error" code:100 userInfo:nil];
                                  if (failure) {
                                      failure(error, 404);
                                  }
@@ -148,7 +148,58 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
 - (void) getForecastWeatherByCoordinates:(CLLocation*) location
                                onSuccess:(void(^)(NSArray* data)) success
                                onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
+    NSDictionary* params = @{
+                             @"units": @"metric",
+                             @"appid": apikey,
+                             @"lat": [NSString stringWithFormat:@"%.8f", location.coordinate.latitude],
+                             @"lon": [NSString stringWithFormat:@"%.8f", location.coordinate.longitude]
+                             };
     
+    [self.sessionManager GET:@"forecast/weather"
+                  parameters:params
+                    progress:^(NSProgress * downloadProgress) {}
+                     success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
+                         if (success) {
+//                             NSLog(@"%@", responseObject);
+                             if ([responseObject[@"cod"] integerValue] == 200) {
+                                 
+                                 NSArray *resultList = responseObject[@"list"];
+                                 NSString *name = responseObject[@"city"][@"name"] ? responseObject[@"city"][@"name"] : @"Narnia";
+                                 NSMutableArray *response = [NSMutableArray array];
+
+                                 for (NSDictionary *currentListItem in resultList) {
+                                     NSDictionary *responseTmp = @{
+                                                                   @"temp": currentListItem[@"main"][@"temp"] ? currentListItem[@"main"][@"temp"] : @"0",                    // температура в градусах цельсия
+                                                                   @"pressure": currentListItem[@"main"][@"pressure"] ? currentListItem[@"main"][@"pressure"] : @"0",        // давление в hPa
+                                                                   @"humidity": currentListItem[@"main"][@"humidity"] ? currentListItem[@"main"][@"humidity"] : @"0",        // влажность в %
+                                                                   @"speed": currentListItem[@"wind"][@"speed"] ? currentListItem[@"wind"][@"speed"] : @"0",                 // скорость ветра в м/с
+                                                                   @"deg": currentListItem[@"wind"][@"deg"] ? currentListItem[@"wind"][@"deg"] : @"0",                       // направление ветра в градусах
+                                                                   @"icon": currentListItem[@"weather"][0][@"icon"] ? currentListItem[@"weather"][0][@"icon"] : @"01d",      // иконка
+                                                                   @"description": currentListItem[@"weather"][0][@"description"],                                           // описание погоды
+                                                                   @"name": name,                                                                                            // название местности
+                                                                   @"lat": params[@"lat"],
+                                                                   @"lng": params[@"lon"],
+                                                                   @"fromDate": currentListItem[@"dt"] ? currentListItem[@"dt"] : @"1451606400"
+                                                                };
+                                     
+                                     [response addObject:responseTmp];
+                                 }
+                                 
+                                 success(response);
+                             } else {
+                                 NSError* error = [[NSError alloc] initWithDomain:@"openweathermap API error" code:100 userInfo:nil];
+                                 if (failure) {
+                                     failure(error, 404);
+                                 }
+                             }
+                         }
+                     }
+                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                         if (failure) {
+                             failure(error, 404);
+                         }
+                     }
+     ];
 }
 
 

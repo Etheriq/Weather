@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "CurrentWeather.h"
+#import "ForecastWeather.h"
 
 @interface YTDBManager : NSObject
 
@@ -23,5 +24,7 @@
 
 - (CurrentWeather*) updateCurrentWeatherForToday: (NSDictionary*) data;
 - (nullable CurrentWeather*) getCurrentWeatherForToday;
+- (NSArray*) updateForecastWeather: (NSArray*) data;
+- (NSArray*) getForecastWeatherFromDate: (NSDate*) dateFrom;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "YTDBManager.h"
 
-
 @implementation YTDBManager
 
 #pragma mark - SingleTone Constructor
@@ -71,6 +70,60 @@
     }
     
     return currentWeather;
+}
+
+- (NSArray*) updateForecastWeather: (NSArray*) data {
+    
+    NSArray *oldData = [self getForecastWeatherFromDate:[NSDate date]];
+    if ([oldData count] > 0) {
+        [self removeOldForecastWeather:oldData];
+    }
+    
+    NSMutableArray *result = [NSMutableArray array];
+    for (NSDictionary *forecastData in data) {
+        ForecastWeather *forecastWeather = [NSEntityDescription insertNewObjectForEntityForName:[[ForecastWeather class] description] inManagedObjectContext:self.managedObjectContext];
+        [forecastWeather initWithForecastWeatherDictionary:forecastData];
+        
+        NSError *err = nil;
+        if(![self.managedObjectContext save:&err]){
+            NSLog(@"%@", [err localizedDescription]);
+        }
+        [result addObject:forecastWeather];
+    }
+    
+    return result;
+}
+
+- (NSArray*) getForecastWeatherFromDate:(NSDate*) dateFrom {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:[[ForecastWeather class] description] inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:description];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"createdAt >= %@", dateFrom];
+    [request setPredicate:predicate];
+    
+    NSError *errorReq = nil;
+    NSArray *res = nil;
+    
+    if (!(res = [self.managedObjectContext executeFetchRequest:request error:&errorReq])) {
+        res = @[];
+        NSLog(@"Get all current Weather error: %@", [errorReq localizedDescription]);
+    }
+    
+    return res;
+}
+
+- (void) removeOldForecastWeather: (NSArray *) data {
+    
+    //  Delete
+    for (id object in data) {
+        [self.managedObjectContext deleteObject:object];
+    }
+    
+    NSError *errorReq = nil;
+    if(![self.managedObjectContext save:&errorReq]){
+        NSLog(@"Error on remove old forecast objects %@", [errorReq localizedDescription]);
+    }
 }
 
 #pragma mark - Core Data stack

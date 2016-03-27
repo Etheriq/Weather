@@ -23,9 +23,9 @@
     [super viewDidLoad];
     
     self.menu = @[
-                  @{@"vcID": @"YTMainVC", @"menuTitle": @"main View"},
-                  @{@"vcID": @"secondVC", @"menuTitle": @"second View"},
-                  @{@"vcID": @"thirdVC", @"menuTitle": @"Map VC"}
+                  @{@"vcID": @"YTMainVC", @"menuTitle": @"Current weather"},
+                  @{@"vcID": @"secondVC", @"menuTitle": @"Forecast weather"},
+                  @{@"vcID": @"thirdVC", @"menuTitle": @"Map"}
                 ];
     
 }
@@ -55,7 +55,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:[[self.menu objectAtIndex:indexPath.row] valueForKey:@"vcID"]];
-    vc.title = [NSString stringWithFormat:@"Demo #%ld-%ld", (long)indexPath.section, (long)indexPath.row];
+    vc.title = [NSString stringWithFormat:@"%@", [self.menu objectAtIndex:indexPath.row][@"menuTitle"]];
     
     UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
     

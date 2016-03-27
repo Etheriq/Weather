@@ -129,6 +129,35 @@
             </objects>
             <point key="canvasLocation" x="1287.5" y="538.5"/>
         </scene>
+        <!--Forecast WeatherVC-->
+        <scene sceneID="I6O-bN-8qe">
+            <objects>
+                <tableViewController storyboardIdentifier="secondVC" id="5wy-8C-vM9" customClass="YTForecastWeatherVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="X8x-OO-b1b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="KhR-hW-Caq" customClass="YTForecastWeatherCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KhR-hW-Caq" id="h4E-Uk-IOX">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5wy-8C-vM9" id="epX-sW-oqR"/>
+                            <outlet property="delegate" destination="5wy-8C-vM9" id="od3-EU-Hwf"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3b0-do-Gtq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="782.5" y="1279.5"/>
+        </scene>
         <!--MapVC-->
         <scene sceneID="MOF-nm-RsY">
             <objects>
@@ -159,37 +188,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oso-pg-7Yw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1287.5" y="1279.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="W0C-9W-M5h">
-            <objects>
-                <viewController storyboardIdentifier="secondVC" id="6Fr-zh-mVy" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ihB-q3-yXY"/>
-                        <viewControllerLayoutGuide type="bottom" id="joZ-XP-dq8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dDj-aG-a6d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="secondVC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-CG-4bb">
-                                <rect key="frame" x="148" y="324" width="79" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="8lJ-CG-4bb" firstAttribute="centerX" secondItem="dDj-aG-a6d" secondAttribute="centerX" id="vXm-Ff-dc1"/>
-                            <constraint firstItem="8lJ-CG-4bb" firstAttribute="centerY" secondItem="dDj-aG-a6d" secondAttribute="centerY" id="yEp-Em-Ehv"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZzI-FE-a7M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="782.5" y="1279.5"/>
         </scene>
         <!--Side Menu Container View Controller-->
         <scene sceneID="ivR-25-eRf">
