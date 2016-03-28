@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MFSideMenuContainerViewController.h"
+@import GoogleMaps;
 
 @interface AppDelegate ()
 
@@ -25,6 +26,7 @@
     
     [container setRightMenuViewController:sideMenuVC];
     [container setCenterViewController:navigationController];
+    [GMSServices provideAPIKey:@"AIzaSyBkZbpBVCXylhh_3lPOz-3cY5e-1TmA2F4"];
     
     return YES;
 }

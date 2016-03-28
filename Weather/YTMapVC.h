@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MFSideMenu.h"
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface YTMapVC : UIViewController
+@interface YTMapVC : UIViewController <GMSMapViewDelegate>
 
 @end

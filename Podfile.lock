@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - GoogleMaps (1.12.3)
   - KVNProgress (2.2.4)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -21,11 +22,13 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - GoogleMaps
   - KVNProgress
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  GoogleMaps: a4ac67918d0b5ba5f6b9893ac80487e357779e6c
   KVNProgress: 541edcea5a1fef592aceac8d791a410d38cb499d
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 

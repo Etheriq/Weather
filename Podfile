@@ -13,4 +13,5 @@ target 'Weather' do
 	pod 'KVNProgress'
 	pod 'SDWebImage'
 	pod 'AFNetworking'
+	pod 'GoogleMaps'
 end
