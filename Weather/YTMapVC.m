@@ -10,6 +10,7 @@
 #import "YTCustomInfoWindow.h"
 #import "YTGoogleGeocodeManager.h"
 #import "YTRequestManager.h"
+#import "YTLocationManager.h"
 @import GoogleMaps;
 
 @interface YTMapVC()
@@ -36,9 +37,10 @@
 }
 
 -(void) loadView {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
+    CLLocation *location = [[YTLocationManager sharedManager] updateLocation];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.coordinate.latitude
+                                                            longitude:location.coordinate.longitude
+                                                                 zoom:15];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.delegate = self;
     mapView_.accessibilityElementsHidden = NO;
@@ -47,9 +49,9 @@
     self.view = mapView_;
     
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
+    marker.position = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+//    marker.title = @"Sydney";
+//    marker.snippet = @"Australia";
     marker.map = mapView_;
 }
 
@@ -122,7 +124,7 @@
         } onFailure:nil];
     } else {
         infoWindow.placeNameLabel.text = infoPlace;
-        NSLog(@"%@", infoPlace);
+        NSLog(@"xxx --> %@", infoPlace);
     }
     
     return infoWindow;
