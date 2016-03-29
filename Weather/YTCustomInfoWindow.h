@@ -11,6 +11,11 @@
 @interface YTCustomInfoWindow : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *coordinateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tempLabel;
+@property (weak, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pressureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *windSpeedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunriseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
 
 @end

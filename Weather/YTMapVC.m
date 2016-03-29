@@ -9,6 +9,7 @@
 #import "YTMapVC.h"
 #import "YTCustomInfoWindow.h"
 #import "YTGoogleGeocodeManager.h"
+#import "YTRequestManager.h"
 @import GoogleMaps;
 
 @interface YTMapVC()
@@ -19,7 +20,7 @@
     GMSMapView *mapView_;
     GMSPlacesClient *placeClient_;
     NSString *infoPlace;
-    NSString *infoCoords;
+    NSDictionary *currentWeatherInfo;
 }
 
 - (void)viewDidLoad {
@@ -70,20 +71,20 @@
     
     [mapView_ animateToLocation:coordinate];
     
-    [placeClient_ currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error) {
-        if (error != nil) {
-            NSLog(@"Pick Place error %@", [error localizedDescription]);
-            return;
-        }
-        
-        if (placeLikelihoodList != nil) {
-            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
-            if (place != nil) {
-//                NSLog(@"Place = %@", place);
-//                NSLog(@"name: %@, addr: %@", place.name, [[place.formattedAddress componentsSeparatedByString:@", "] componentsJoinedByString:@"\n"]);
-            }
-        }
-    }];
+//    [placeClient_ currentPlaceWithCallback:^(GMSPlaceLikelihoodList *placeLikelihoodList, NSError *error) {
+//        if (error != nil) {
+//            NSLog(@"Pick Place error %@", [error localizedDescription]);
+//            return;
+//        }
+//        
+//        if (placeLikelihoodList != nil) {
+//            GMSPlace *place = [[[placeLikelihoodList likelihoods] firstObject] place];
+//            if (place != nil) {
+////                NSLog(@"Place = %@", place);
+////                NSLog(@"name: %@, addr: %@", place.name, [[place.formattedAddress componentsSeparatedByString:@", "] componentsJoinedByString:@"\n"]);
+//            }
+//        }
+//    }];
     
     NSLog(@"tapped at: lat: %f, lng: %f", coordinate.latitude, coordinate.longitude);
 }
@@ -92,26 +93,44 @@
     YTCustomInfoWindow *infoWindow = [[[NSBundle mainBundle] loadNibNamed:@"InfoWindow" owner:self options:nil] objectAtIndex:0];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:marker.position.latitude longitude:marker.position.longitude];
     
-    if (infoPlace == nil) {
-        [[YTGoogleGeocodeManager sharedManager] getGeocodeInformationByCoordinates:location onSuccess:^(NSString *info) {
-            infoCoords = [NSString stringWithFormat:@"lat: %.8f lng: %.8f", location.coordinate.latitude, location.coordinate.longitude];
-            infoPlace = info;
-//            infoWindow.coordinateLabel.text = [NSString stringWithFormat:@"lat: %.8f lng: %.8f", location.coordinate.latitude, location.coordinate.longitude];
-//            infoWindow.placeNameLabel.text = info;
+    if (currentWeatherInfo == nil) {
+        [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:location onSuccess:^(NSDictionary *data) {
+            currentWeatherInfo = data;
             [mapView_ setSelectedMarker:marker];
-            
+        } onFailure:nil];
+    } else {
+        infoWindow.placeNameLabel.text = [currentWeatherInfo objectForKey:@"name"];
+        infoWindow.tempLabel.text = [NSString stringWithFormat:@"%.0f °C", [[currentWeatherInfo objectForKey:@"temp"] floatValue]];
+        infoWindow.humidityLabel.text = [NSString stringWithFormat:@"Humidity: %li %%", [[currentWeatherInfo objectForKey:@"humidity"] integerValue]];
+        infoWindow.pressureLabel.text = [NSString stringWithFormat:@"Pressure: %.1f hPa", [[currentWeatherInfo objectForKey:@"pressure"] floatValue]];
+        infoWindow.windSpeedLabel.text = [NSString stringWithFormat:@"Wind speed: %li m/s", [[currentWeatherInfo objectForKey:@"speed"] integerValue]];
+        
+        NSTimeInterval intervalSunrise = [[currentWeatherInfo objectForKey:@"sunrise"] integerValue];
+        NSDate *sunrise = [NSDate dateWithTimeIntervalSince1970:intervalSunrise];
+        
+        NSTimeInterval intervalSunset = [[currentWeatherInfo objectForKey:@"sunset"] integerValue];
+        NSDate *sunset = [NSDate dateWithTimeIntervalSince1970:intervalSunset];
+        
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"kk:mm"];
+        infoWindow.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [formatter stringFromDate:sunrise]];
+        infoWindow.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [formatter stringFromDate:sunset]];
+    }
+    if (infoPlace == nil) {
+        [[YTGoogleGeocodeManager sharedManager] getGeocodeInformationByCoordinates:location onSuccess:^(NSString *geoInfo) {
+            infoPlace = geoInfo;
         } onFailure:nil];
     } else {
         infoWindow.placeNameLabel.text = infoPlace;
-        infoWindow.coordinateLabel.text = infoCoords;
-    }    
+        NSLog(@"%@", infoPlace);
+    }
     
     return infoWindow;
 }
 
 - (void)mapView:(GMSMapView *)mapView didCloseInfoWindowOfMarker:(GMSMarker *)marker {
     infoPlace = nil;
-    infoCoords = nil;
+    currentWeatherInfo = nil;
 }
 
 @end

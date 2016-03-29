@@ -18,9 +18,4 @@
 }
 */
 
-- (IBAction)showForecastAction:(UIButton *)sender {
-    
-    NSLog(@"coord: %@", self.coordinateLabel.text);
-}
-
 @end
