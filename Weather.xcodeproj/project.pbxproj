@@ -12,6 +12,7 @@
 		2916D0ED1CA3392B000EC079 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2916D0EC1CA3392B000EC079 /* CoreLocation.framework */; };
 		292958141CA9620200AC694D /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 292958131CA9620200AC694D /* InfoWindow.xib */; };
 		292958171CA96BE600AC694D /* YTCustomInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 292958161CA96BE600AC694D /* YTCustomInfoWindow.m */; };
+		2942846A1CAC7B030061FB41 /* YTStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 294284691CAC7B030061FB41 /* YTStatisticsVC.m */; };
 		2983BBFF1CA5E91C00FD09AC /* YTGoogleGeocodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2983BBFE1CA5E91C00FD09AC /* YTGoogleGeocodeManager.m */; };
 		29992B781CA41B5900FF6B51 /* YTRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 29992B771CA41B5900FF6B51 /* YTRequestManager.m */; };
 		29B99AB91CA8372100A9305B /* ForecastWeather+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B99AB61CA8372100A9305B /* ForecastWeather+CoreDataProperties.m */; };
@@ -45,6 +46,8 @@
 		292958131CA9620200AC694D /* InfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
 		292958151CA96BE600AC694D /* YTCustomInfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomInfoWindow.h; sourceTree = "<group>"; };
 		292958161CA96BE600AC694D /* YTCustomInfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCustomInfoWindow.m; sourceTree = "<group>"; };
+		294284681CAC7B030061FB41 /* YTStatisticsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTStatisticsVC.h; sourceTree = "<group>"; };
+		294284691CAC7B030061FB41 /* YTStatisticsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTStatisticsVC.m; sourceTree = "<group>"; };
 		2983BBFD1CA5E91C00FD09AC /* YTGoogleGeocodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTGoogleGeocodeManager.h; sourceTree = "<group>"; };
 		2983BBFE1CA5E91C00FD09AC /* YTGoogleGeocodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTGoogleGeocodeManager.m; sourceTree = "<group>"; };
 		29992B761CA41B5900FF6B51 /* YTRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRequestManager.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				29D696141CA0C39F000753B7 /* YTSideMenuVC.m */,
 				29D696161CA20438000753B7 /* YTMapVC.h */,
 				29D696171CA20438000753B7 /* YTMapVC.m */,
+				294284681CAC7B030061FB41 /* YTStatisticsVC.h */,
+				294284691CAC7B030061FB41 /* YTStatisticsVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2942846A1CAC7B030061FB41 /* YTStatisticsVC.m in Sources */,
 				29D695EB1CA0B668000753B7 /* Weather.xcdatamodeld in Sources */,
 				29B99AB91CA8372100A9305B /* ForecastWeather+CoreDataProperties.m in Sources */,
 				29B99ABA1CA8372100A9305B /* ForecastWeather.m in Sources */,

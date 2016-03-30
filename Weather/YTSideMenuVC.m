@@ -23,9 +23,10 @@
     [super viewDidLoad];
     
     self.menu = @[
-                  @{@"vcID": @"YTMainVC", @"menuTitle": @"Current weather"},
-                  @{@"vcID": @"secondVC", @"menuTitle": @"Forecast weather"},
-                  @{@"vcID": @"thirdVC", @"menuTitle": @"Map"}
+                  @{@"vcID": @"mainVC", @"menuTitle": @"Current weather"},
+                  @{@"vcID": @"forecastVC", @"menuTitle": @"Forecast weather"},
+                  @{@"vcID": @"mapVC", @"menuTitle": @"Map"},
+                  @{@"vcID": @"statsVC", @"menuTitle": @"Statistics"}
                 ];
     
 }

@@ -97,6 +97,10 @@
     return [NSString stringWithFormat:@"%@", [formatter stringFromDate:forecastWeather.orderDate]];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - UIRefreshControl 
 
 - (void)refresh:(UIRefreshControl *)refreshControl

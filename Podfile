@@ -11,7 +11,7 @@ target 'Weather' do
 	inhibit_all_warnings!
 
 	pod 'KVNProgress'
-	pod 'SDWebImage'
+	pod 'BEMSimpleLineGraph'
 	pod 'AFNetworking'
 	pod 'GoogleMaps'
 end
