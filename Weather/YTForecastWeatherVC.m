@@ -61,6 +61,11 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return [self.frc.sections count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     id<NSFetchedResultsSectionInfo> sectionInfo = self.frc.sections[section];
@@ -80,6 +85,16 @@
     cell.forecastWeather = forecastWeather;
     
     return cell;
+}
+
+-(nullable NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id<NSFetchedResultsSectionInfo> sectionInfo = self.frc.sections[section];
+    ForecastWeather *forecastWeather = [sectionInfo.objects firstObject];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"d MMM yyyy"];
+    
+    return [NSString stringWithFormat:@"%@", [formatter stringFromDate:forecastWeather.orderDate]];
 }
 
 #pragma mark - UIRefreshControl 
@@ -120,7 +135,7 @@
     [request setSortDescriptors:@[sortByCreated]];
     [request setFetchBatchSize:25];
     
-    _frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    _frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:@"orderDate" cacheName:@"fw"];
     _frc.delegate = self;
     
     NSError *error = nil;

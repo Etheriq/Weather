@@ -2,7 +2,7 @@
 //  ForecastWeather+CoreDataProperties.m
 //  Weather
 //
-//  Created by Yuriy T on 27.03.16.
+//  Created by Yuriy T on 30.03.16.
 //  Copyright © 2016 Yuriy T. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,15 +14,16 @@
 @implementation ForecastWeather (CoreDataProperties)
 
 @dynamic createdAt;
-@dynamic temp;
-@dynamic pressure;
 @dynamic humidity;
 @dynamic icon;
-@dynamic weatherDescription;
-@dynamic speed;
-@dynamic windOrientation;
-@dynamic name;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic name;
+@dynamic pressure;
+@dynamic speed;
+@dynamic temp;
+@dynamic weatherDescription;
+@dynamic windOrientation;
+@dynamic orderDate;
 
 @end
