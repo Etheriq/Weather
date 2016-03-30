@@ -23,24 +23,18 @@
     self.latitude = [NSNumber numberWithDouble:[[data objectForKey:@"lat"] doubleValue]];
     self.longitude = [NSNumber numberWithDouble:[[data objectForKey:@"lng"] doubleValue]];
     NSTimeInterval interval = [[data objectForKey:@"fromDate"] integerValue];
-    self.createdAt = [NSDate dateWithTimeIntervalSince1970:interval];
-//    
-//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-//    [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-//    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:[NSDate date]];
-//    comps.hour = 0;
-//    comps.minute = 0;
-//    comps.second = 0;
-//    NSDate *date = [calendar dateFromComponents:comps];
-//    self.orderDate = date;
-//    
-    NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents* dateComponents = [gregorian components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:[NSDate date]];
-    dateComponents.hour = 0;
-    dateComponents.minute = 0;
-    dateComponents.second = 0;
+    NSDate *forecastDate = [NSDate dateWithTimeIntervalSince1970:interval];
+    self.createdAt = forecastDate;
     
-    self.orderDate = [gregorian dateFromComponents:dateComponents];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:forecastDate];
+    [comps setHour:0];
+    [comps setMinute:0];
+    [comps setSecond:0];
+    NSDate *date = [calendar dateFromComponents:comps];
+    
+    self.orderDate = date;
 }
 
 @end

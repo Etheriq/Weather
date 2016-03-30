@@ -59,7 +59,7 @@
     } onFailure:nil];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -92,7 +92,7 @@
     ForecastWeather *forecastWeather = [sectionInfo.objects firstObject];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"d MMM yyyy"];
+    [formatter setDateFormat:@"d MMMM yyyy"];
     
     return [NSString stringWithFormat:@"%@", [formatter stringFromDate:forecastWeather.orderDate]];
 }
@@ -135,7 +135,7 @@
     [request setSortDescriptors:@[sortByCreated]];
     [request setFetchBatchSize:25];
     
-    _frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:@"orderDate" cacheName:@"fw"];
+    _frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:context sectionNameKeyPath:@"orderDate" cacheName:nil];
     _frc.delegate = self;
     
     NSError *error = nil;
