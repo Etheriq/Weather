@@ -11,6 +11,7 @@
 #import "YTGoogleGeocodeManager.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"
+#import "YTDateHelper.h"
 @import GoogleMaps;
 
 @interface YTMapVC()
@@ -113,10 +114,8 @@
         NSTimeInterval intervalSunset = [[currentWeatherInfo objectForKey:@"sunset"] integerValue];
         NSDate *sunset = [NSDate dateWithTimeIntervalSince1970:intervalSunset];
         
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"kk:mm"];
-        infoWindow.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [formatter stringFromDate:sunrise]];
-        infoWindow.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [formatter stringFromDate:sunset]];
+        infoWindow.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:sunrise withFormat:@"kk:mm"]];
+        infoWindow.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:sunset withFormat:@"kk:mm"]];
     }
     if (infoPlace == nil) {
         [[YTGoogleGeocodeManager sharedManager] getGeocodeInformationByCoordinates:location onSuccess:^(NSString *geoInfo) {

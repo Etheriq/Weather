@@ -12,6 +12,7 @@
 #import "YTDBManager.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"
+#import "YTDateHelper.h"
 
 @interface YTForecastWeatherVC () <NSFetchedResultsControllerDelegate>
 
@@ -91,10 +92,7 @@
     id<NSFetchedResultsSectionInfo> sectionInfo = self.frc.sections[section];
     ForecastWeather *forecastWeather = [sectionInfo.objects firstObject];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"d MMMM yyyy"];
-    
-    return [NSString stringWithFormat:@"%@", [formatter stringFromDate:forecastWeather.orderDate]];
+    return [NSString stringWithFormat:@"%@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:forecastWeather.orderDate withFormat:@"d MMMM yyyy"]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,10 +110,7 @@
         [self makeRequestToWeatherAPI];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"d MMM, kk:mm"];
-            NSString *lastUpdate = [NSString stringWithFormat:@"Last updated on %@", [formatter stringFromDate:[NSDate date]]];
-            
+            NSString *lastUpdate = [NSString stringWithFormat:@"Last updated on %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:[NSDate date] withFormat:@"d MMM, kk:mm"]];
             refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdate];
             
             [self.tableView reloadData];

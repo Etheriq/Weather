@@ -8,6 +8,8 @@
 
 #import "YTStatisticsVC.h"
 #import "BEMSimpleLineGraphView.h"
+#import "YTDBManager.h"
+#import "YTDateHelper.h"
 
 @interface YTStatisticsVC () <BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource>
 
@@ -21,24 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSDictionary *dic1 = @{
-                           @"temp": @3.2f,
-                           @"date": @"2 December 2016"
-                         };
-    NSDictionary *dic2 = @{
-                           @"temp": @18.6f,
-                           @"date": @"12 May 2016"
-                           };
-    NSDictionary *dic3 = @{
-                           @"temp": @-3.2f,
-                           @"date": @"13 May 2016"
-                           };
-    NSDictionary *dic4 = @{
-                           @"temp": @22.2f,
-                           @"date": @"15 July 2016"
-                           };
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithImage:[UIImage imageNamed:@"menu-icon"]
+                                              style:UIBarButtonItemStylePlain
+                                              target:self
+                                              action:@selector(showMenuAction)
+                                              ];
     
-    self.statResult = [NSArray arrayWithObjects:dic1, dic2, dic3, dic4, nil];
+    self.statResult = [[YTDBManager sharedManager] getAverageForecastStatisticsForLastThreeMonths];
     
     self.statsView.enableXAxisLabel = YES;
     self.statsView.enablePopUpReport = YES;
@@ -54,6 +46,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+# pragma mark - Actions
+
+- (void) showMenuAction {
+    [self.menuContainerViewController toggleRightSideMenuCompletion:nil];
+}
 
 #pragma mark - BEMSimpleLineGraphDataSource
 
@@ -79,7 +77,11 @@
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
     NSDictionary *currentStatInfo = [self.statResult objectAtIndex:index];
     
-    return  [NSString stringWithFormat:@"%@", [[currentStatInfo objectForKey:@"date"] stringByReplacingOccurrencesOfString:@" " withString:@"\n"]];
+    return  [NSString stringWithFormat:@"%@", [[
+                                                [YTDateHelper sharedHelper]
+                                                    getFormattedDateStringFromDate:[currentStatInfo objectForKey:@"orderDate"]
+                                                    withFormat:@"dd MMM yyyy"]
+                                               stringByReplacingOccurrencesOfString:@" " withString:@"\n"]];
 }
 
 - (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {

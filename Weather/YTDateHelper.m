@@ -34,4 +34,11 @@
     return [calendar dateFromComponents:comps];
 }
 
+-(NSString *) getFormattedDateStringFromDate:(NSDate *) date withFormat:(NSString*) format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:format];
+    
+    return [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+}
+
 @end

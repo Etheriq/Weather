@@ -13,5 +13,6 @@
 + (YTDateHelper *) sharedHelper;
 
 -(NSDate*) getStartDayFromDate:(NSDate*) from;
+-(NSString *) getFormattedDateStringFromDate:(NSDate *) date withFormat:(NSString*) format;
 
 @end

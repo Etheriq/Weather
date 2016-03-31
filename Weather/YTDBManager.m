@@ -122,7 +122,37 @@
 
 - (NSArray*) getAverageForecastStatisticsForLastThreeMonths {
     
-    return @[];
+    NSDate *startToday = [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth: -3];
+    NSDate *threeMothsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:startToday options:0];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[[ForecastWeather class] description] inManagedObjectContext:self.managedObjectContext];
+    NSExpression *groupByKey = [NSExpression expressionForKeyPath:@"orderDate"];
+    NSExpression *avgFunc = [NSExpression expressionForFunction:@"average:" arguments:@[groupByKey]];
+    NSExpressionDescription *calc = [[NSExpressionDescription alloc] init];
+    calc.name = @"temp";
+    calc.expression = avgFunc;
+    calc.expressionResultType = NSFloatAttributeType;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    request.propertiesToGroupBy = @[@"orderDate"];
+    request.propertiesToFetch = @[@"orderDate", calc];
+    request.resultType = NSDictionaryResultType;
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderDate >= %@ AND orderDate < %@", threeMothsAgo, startToday];
+//    [request setPredicate:predicate];
+    NSSortDescriptor *dateSortDescr = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    [request setSortDescriptors:@[dateSortDescr]];
+    
+    NSError *errorReq = nil;
+    NSArray *res = nil;
+    
+    if (!(res = [self.managedObjectContext executeFetchRequest:request error:&errorReq])) {
+        res = @[];
+        NSLog(@"Error on fetch avg temp group by orderDate: %@", [errorReq localizedDescription]);
+    }
+    
+    return res;
 }
 
 #pragma mark - Core Data stack

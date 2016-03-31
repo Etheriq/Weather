@@ -12,6 +12,7 @@
 #import "YTLocationManager.h"
 #import "YTGoogleGeocodeManager.h"
 #import "CurrentWeather.h"
+#import "YTDateHelper.h"
 
 @interface YTMainVC()
 
@@ -72,10 +73,8 @@
         self.humidityLabel.text = [NSString stringWithFormat:@"Humidity: %li %%", [currentWeather.humidity integerValue]];
         self.pressureLabel.text = [NSString stringWithFormat:@"Pressure: %.0f hPa", [currentWeather.pressure floatValue]];
         self.speedLabel.text = [NSString stringWithFormat:@"Wind speed: %li m/s", [currentWeather.speed integerValue]];
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"kk:mm"];
-        self.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [formatter stringFromDate:currentWeather.sunrise]];
-        self.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [formatter stringFromDate:currentWeather.sunset]];
+        self.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:currentWeather.sunrise withFormat:@"kk:mm"]];
+        self.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:currentWeather.sunset withFormat:@"kk:mm"]];
     });
 }
 
@@ -94,10 +93,7 @@
        onSuccess:^(NSDictionary *data) {
            
            CurrentWeather* currentWeather = [[YTDBManager sharedManager] updateCurrentWeatherForToday:data];
-           [self updateMainView:currentWeather];
-           
-//           NSLog(@"Weather data by ccord %@", data);
-//           NSLog(@"Weather coreData object by ccord %@", currentWeather);
+           [self updateMainView:currentWeather];           
        }
        onFailure:^(NSError *error, NSInteger statusCode) {
            NSLog(@"%@", [error localizedDescription]);
