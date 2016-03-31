@@ -7,6 +7,7 @@
 //
 
 #import "CurrentWeather.h"
+#import "YTDateHelper.h"
 
 @implementation CurrentWeather
 
@@ -26,14 +27,7 @@
     self.name = [data objectForKey:@"name"];
     self.latitude = [NSNumber numberWithDouble:[[data objectForKey:@"lat"] doubleValue]];
     self.longitude = [NSNumber numberWithDouble:[[data objectForKey:@"lng"] doubleValue]];
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:[NSDate date]];
-    comps.hour = 0;
-    comps.minute = 0;
-    comps.second = 0;
-    NSDate *date = [calendar dateFromComponents:comps];
-    self.createdAt = date;
+    self.createdAt = [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]];
 }
 
 @end

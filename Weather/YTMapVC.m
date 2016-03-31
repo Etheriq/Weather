@@ -33,7 +33,7 @@
                                               target:self
                                               action:@selector(showMenuAction)
                                               ];
-    placeClient_ = [GMSPlacesClient sharedClient];
+//    placeClient_ = [GMSPlacesClient sharedClient];
 }
 
 -(void) loadView {

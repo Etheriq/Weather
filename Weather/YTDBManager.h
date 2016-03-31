@@ -26,5 +26,6 @@
 - (nullable CurrentWeather*) getCurrentWeatherForToday;
 - (NSArray*) updateForecastWeather: (NSArray*) data;
 - (NSArray*) getForecastWeatherFromDate: (NSDate*) dateFrom;
+- (NSArray*) getAverageForecastStatisticsForLastThreeMonths;
 
 @end

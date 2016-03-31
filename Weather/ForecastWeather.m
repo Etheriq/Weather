@@ -7,6 +7,7 @@
 //
 
 #import "ForecastWeather.h"
+#import "YTDateHelper.h"
 
 @implementation ForecastWeather
 
@@ -25,16 +26,7 @@
     NSTimeInterval interval = [[data objectForKey:@"fromDate"] integerValue];
     NSDate *forecastDate = [NSDate dateWithTimeIntervalSince1970:interval];
     self.createdAt = forecastDate;
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
-    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:forecastDate];
-    [comps setHour:0];
-    [comps setMinute:0];
-    [comps setSecond:0];
-    NSDate *date = [calendar dateFromComponents:comps];
-    
-    self.orderDate = date;
+    self.orderDate = [[YTDateHelper sharedHelper] getStartDayFromDate:forecastDate];
 }
 
 @end

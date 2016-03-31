@@ -7,6 +7,7 @@
 //
 
 #import "YTDBManager.h"
+#import "YTDateHelper.h"
 
 @implementation YTDBManager
 
@@ -47,15 +48,7 @@
     NSEntityDescription *description = [NSEntityDescription entityForName:[[CurrentWeather class] description] inManagedObjectContext:self.managedObjectContext];
     [request setEntity:description];
     
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [calendar setTimeZone:[NSTimeZone systemTimeZone]];
-    NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitTimeZone) fromDate:[NSDate date]];
-    comps.hour = 0;
-    comps.minute = 0;
-    comps.second = 0;
-    NSDate *date = [calendar dateFromComponents:comps];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"createdAt = %@", date];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"createdAt = %@", [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]]];
     [request setPredicate:predicate];
     
     NSError *errorReq = nil;
@@ -125,6 +118,11 @@
     if(![self.managedObjectContext save:&errorReq]){
         NSLog(@"Error on remove old forecast objects %@", [errorReq localizedDescription]);
     }
+}
+
+- (NSArray*) getAverageForecastStatisticsForLastThreeMonths {
+    
+    return @[];
 }
 
 #pragma mark - Core Data stack
