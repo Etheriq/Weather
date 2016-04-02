@@ -145,7 +145,7 @@
     [request setSortDescriptors:@[dateSortDescr]];
     
     NSError *errorReq = nil;
-    NSArray *res = nil;
+    NSArray *res = @[];
     
     if (!(res = [self.managedObjectContext executeFetchRequest:request error:&errorReq])) {
         res = @[];
