@@ -19,6 +19,7 @@
 @property(assign, nonatomic) double longitude;
 @property(strong, nonatomic) NSDate *sunrise;
 @property(strong, nonatomic) NSDate *sunset;
+@property(strong, nonatomic) NSDate<Optional> *createdAt;
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *icon;
 @property(strong, nonatomic) NSString *weatherDescription;

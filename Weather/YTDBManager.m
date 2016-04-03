@@ -122,10 +122,10 @@
 
 - (NSArray*) getAverageForecastStatisticsForLastThreeMonths {
     
-    NSDate *startToday = [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]];
-    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    [dateComponents setMonth: -3];
-    NSDate *threeMothsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:startToday options:0];
+//    NSDate *startToday = [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]];
+//    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+//    [dateComponents setMonth: -3];
+//    NSDate *threeMothsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:startToday options:0];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:[[ForecastWeather class] description] inManagedObjectContext:self.managedObjectContext];
     NSExpression *groupByKey = [NSExpression expressionForKeyPath:@"orderDate"];

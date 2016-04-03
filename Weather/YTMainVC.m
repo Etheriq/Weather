@@ -8,6 +8,7 @@
 
 #import "YTMainVC.h"
 #import "YTDBManager.h"
+#import "YTMRDBManager.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"
 #import "YTGoogleGeocodeManager.h"
@@ -36,7 +37,7 @@
     
     [[YTLocationManager sharedManager] updateLocation];
     
-    CurrentWeather* currentWeather = [[YTDBManager sharedManager] getCurrentWeatherForToday];
+    CurrentWeather* currentWeather = [[YTMRDBManager sharedManager] getCurrentWeatherForToday];
     if (currentWeather != nil) {
         [self updateMainView:currentWeather];
         NSLog(@"loaded from DB");
@@ -90,10 +91,10 @@
     NSLog(@"Coordinates: lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
     
     [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord
-       onSuccess:^(YTCurrentWeatherModel *data) {
+       onSuccess:^(YTCurrentWeatherModel *dataModel) {
            
-           CurrentWeather* currentWeather = [[YTDBManager sharedManager] updateCurrentWeatherForToday:data];
-           [self updateMainView:currentWeather];           
+           CurrentWeather *currentWeather = [[YTMRDBManager sharedManager] saveAndUpdateCurrentWeatherForToday:dataModel];
+           [self updateMainView:currentWeather];
        }
        onFailure:^(NSError *error, NSInteger statusCode) {
            NSLog(@"%@", [error localizedDescription]);

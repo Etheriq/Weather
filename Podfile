@@ -15,4 +15,5 @@ target 'Weather' do
 	pod 'AFNetworking'
 	pod 'GoogleMaps'
 	pod 'JSONModel'
+	pod 'MagicalRecord'
 end
