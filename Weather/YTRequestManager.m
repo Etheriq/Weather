@@ -97,7 +97,7 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
 }
 
 - (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
-                                  onSuccess:(void(^)(NSDictionary* data)) success
+                                  onSuccess:(void(^)(YTCurrentWeatherModel* model)) success
                                   onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     NSDictionary* params = @{
                              @"units": @"metric",
@@ -111,23 +111,26 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                     progress:^(NSProgress * downloadProgress) {}
                      success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
                          if (success) {
-//                             NSLog(@"%@", responseObject);
                              if ([responseObject[@"cod"] integerValue] == 200) {
                                  NSDictionary* response = @{
-                                                            @"temp": responseObject[@"main"][@"temp"] ? responseObject[@"main"][@"temp"] : @"0",                    // температура в градусах цельсия
-                                                            @"pressure": responseObject[@"main"][@"pressure"] ? responseObject[@"main"][@"pressure"] : @"0",        // давление в hPa
-                                                            @"humidity": responseObject[@"main"][@"humidity"] ? responseObject[@"main"][@"humidity"] : @"0",        // влажность в %
-                                                            @"speed": responseObject[@"wind"][@"speed"] ? responseObject[@"wind"][@"speed"] : @"0",                 // скорость ветра в м/с
-                                                            @"deg": responseObject[@"wind"][@"deg"] ? responseObject[@"wind"][@"deg"] : @"0",                       // направление ветра в градусах
-                                                            @"icon": responseObject[@"weather"][0][@"icon"] ? responseObject[@"weather"][0][@"icon"] : @"01d",      // иконка
-                                                            @"description": responseObject[@"weather"][0][@"description"],                                          // описание погоды
-                                                            @"sunrise": responseObject[@"sys"][@"sunrise"] ? responseObject[@"sys"][@"sunrise"] : @"1451606400",    // восход в timestamp
-                                                            @"sunset": responseObject[@"sys"][@"sunset"] ? responseObject[@"sys"][@"sunset"] : @"1451606400",       // закат в timestamp
-                                                            @"name": responseObject[@"name"] ? responseObject[@"name"] : @"Narnia",                                 // название местности
-                                                            @"lat": params[@"lat"],
-                                                            @"lng": params[@"lon"]
-                                                        };
-                                 success(response);
+                                    @"temp": responseObject[@"main"][@"temp"] ? responseObject[@"main"][@"temp"] : @"0",                    // температура в градусах цельсия
+                                    @"pressure": responseObject[@"main"][@"pressure"] ? responseObject[@"main"][@"pressure"] : @"0",        // давление в hPa
+                                    @"humidity": responseObject[@"main"][@"humidity"] ? responseObject[@"main"][@"humidity"] : @"0",        // влажность в %
+                                    @"speed": responseObject[@"wind"][@"speed"] ? responseObject[@"wind"][@"speed"] : @"0",                 // скорость ветра в м/с
+                                    @"deg": responseObject[@"wind"][@"deg"] ? responseObject[@"wind"][@"deg"] : @"0",                       // направление ветра в градусах
+                                    @"icon": responseObject[@"weather"][0][@"icon"] ? responseObject[@"weather"][0][@"icon"] : @"01d",      // иконка
+                                    @"description": responseObject[@"weather"][0][@"description"],                                          // описание погоды
+                                    @"sunrise": responseObject[@"sys"][@"sunrise"] ? responseObject[@"sys"][@"sunrise"] : @"1451606400",    // восход в timestamp
+                                    @"sunset": responseObject[@"sys"][@"sunset"] ? responseObject[@"sys"][@"sunset"] : @"1451606400",       // закат в timestamp
+                                    @"name": responseObject[@"name"] ? responseObject[@"name"] : @"Narnia",                                 // название местности
+                                    @"lat": params[@"lat"],
+                                    @"lng": params[@"lon"]
+                                 };
+                                 
+                                 NSError *err = nil;
+                                 YTCurrentWeatherModel *currentWeatherModel = [[YTCurrentWeatherModel alloc] initWithDictionary:response error:&err];
+                                 
+                                 success(currentWeatherModel);
                              } else {
                                  NSError* error = [[NSError alloc] initWithDomain:@"openweathermap API error" code:100 userInfo:nil];
                                  if (failure) {

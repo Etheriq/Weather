@@ -34,10 +34,11 @@
                                               target:self
                                               action:@selector(showMenuAction)
                                               ];
+    [self initMap];
 //    placeClient_ = [GMSPlacesClient sharedClient];
 }
 
--(void) loadView {
+-(void) initMap {
     CLLocation *location = [[YTLocationManager sharedManager] updateLocation];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.coordinate.latitude
                                                             longitude:location.coordinate.longitude

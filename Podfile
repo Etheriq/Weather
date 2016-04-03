@@ -14,4 +14,5 @@ target 'Weather' do
 	pod 'BEMSimpleLineGraph'
 	pod 'AFNetworking'
 	pod 'GoogleMaps'
+	pod 'JSONModel'
 end

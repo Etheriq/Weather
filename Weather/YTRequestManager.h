@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocation.h>
+#import "YTCurrentWeatherModel.h"
 
 @interface YTRequestManager : NSObject
 
@@ -22,7 +23,7 @@
                             onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
-                            onSuccess:(void(^)(NSDictionary* data)) success
+                            onSuccess:(void(^)(YTCurrentWeatherModel* data)) success
                             onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void) getForecastWeatherByCoordinates:(CLLocation*) location
