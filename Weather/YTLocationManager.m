@@ -47,18 +47,6 @@
     
     CLLocation* location = [self.locationManager location];
     
-//    NSLog(@"Resolving the Address");
-//    CLGeocoder* geocoder = [[CLGeocoder alloc] init];
-//    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
-//        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
-//        if (error == nil && [placemarks count] > 0) {
-//            CLPlacemark *placemark = [placemarks lastObject];
-//            NSLog(@"Adm area = %@, Locality = %@, Country = %@", placemark.administrativeArea, placemark.locality, placemark.country);
-//        } else {
-//            NSLog(@"%@", error.debugDescription);
-//        }
-//    } ];
-    
     return location;
 }
 
@@ -68,8 +56,6 @@
     CLLocation *currentLocation = [locations lastObject];
     
     if (currentLocation != nil) {
-        
-//        NSLog(@"lat = %.8f, lng = %.8f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
         
         [self.locationManager stopUpdatingLocation];
     }

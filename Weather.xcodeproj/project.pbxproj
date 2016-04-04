@@ -10,6 +10,7 @@
 		290C39241CA884AF00135DA2 /* YTForecastWeatherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C39231CA884AF00135DA2 /* YTForecastWeatherVC.m */; };
 		290C39281CA88B9E00135DA2 /* YTForecastWeatherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 290C39271CA88B9E00135DA2 /* YTForecastWeatherCell.m */; };
 		2916D0ED1CA3392B000EC079 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2916D0EC1CA3392B000EC079 /* CoreLocation.framework */; };
+		2920270F1CB319D50056929C /* YTForecastWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2920270E1CB319D50056929C /* YTForecastWeatherModel.m */; };
 		292958141CA9620200AC694D /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 292958131CA9620200AC694D /* InfoWindow.xib */; };
 		292958171CA96BE600AC694D /* YTCustomInfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 292958161CA96BE600AC694D /* YTCustomInfoWindow.m */; };
 		2942846A1CAC7B030061FB41 /* YTStatisticsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 294284691CAC7B030061FB41 /* YTStatisticsVC.m */; };
@@ -46,6 +47,8 @@
 		290C39261CA88B9E00135DA2 /* YTForecastWeatherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTForecastWeatherCell.h; sourceTree = "<group>"; };
 		290C39271CA88B9E00135DA2 /* YTForecastWeatherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTForecastWeatherCell.m; sourceTree = "<group>"; };
 		2916D0EC1CA3392B000EC079 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2920270D1CB319D50056929C /* YTForecastWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTForecastWeatherModel.h; sourceTree = "<group>"; };
+		2920270E1CB319D50056929C /* YTForecastWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTForecastWeatherModel.m; sourceTree = "<group>"; };
 		292958131CA9620200AC694D /* InfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
 		292958151CA96BE600AC694D /* YTCustomInfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomInfoWindow.h; sourceTree = "<group>"; };
 		292958161CA96BE600AC694D /* YTCustomInfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCustomInfoWindow.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 			children = (
 				298C15DA1CB1243B000B2CE0 /* YTCurrentWeatherModel.h */,
 				298C15DB1CB1243B000B2CE0 /* YTCurrentWeatherModel.m */,
+				2920270D1CB319D50056929C /* YTForecastWeatherModel.h */,
+				2920270E1CB319D50056929C /* YTForecastWeatherModel.m */,
 			);
 			name = JsonModel;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				29D6960E1CA0C050000753B7 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				29D695E21CA0B668000753B7 /* AppDelegate.m in Sources */,
 				29D696181CA20438000753B7 /* YTMapVC.m in Sources */,
+				2920270F1CB319D50056929C /* YTForecastWeatherModel.m in Sources */,
 				29D695DF1CA0B668000753B7 /* main.m in Sources */,
 				290C39281CA88B9E00135DA2 /* YTForecastWeatherCell.m in Sources */,
 				29992B781CA41B5900FF6B51 /* YTRequestManager.m in Sources */,

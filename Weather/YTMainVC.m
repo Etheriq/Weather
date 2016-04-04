@@ -88,7 +88,7 @@
 - (void) refreshView {
     
     CLLocation* coord = [[YTLocationManager sharedManager] updateLocation];
-    NSLog(@"Coordinates: lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
+//    NSLog(@"Coordinates: lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
     
     [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord
        onSuccess:^(YTCurrentWeatherModel *dataModel) {
@@ -105,7 +105,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.cityLabel.text = [NSString stringWithFormat:@"%@", info];
         });
-        NSLog(@"current city is %@", info);
+//        NSLog(@"current city is %@", info);
     } onFailure:nil];
 }
 

@@ -9,18 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CLLocation.h>
 #import "YTCurrentWeatherModel.h"
+#import "YTForecastWeatherModel.h"
 
 @interface YTRequestManager : NSObject
 
 + (YTRequestManager*) sharedManager;
-
-- (void) getCurrentWeatherDataByCity:(NSString*) city
-                         onSuccess:(void(^)(NSDictionary* data)) success
-                         onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
-
-- (void) getForecastWeatherByCity:(NSString*) city
-                            onSuccess:(void(^)(NSDictionary* data)) success
-                            onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
 
 - (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
                             onSuccess:(void(^)(YTCurrentWeatherModel* data)) success
