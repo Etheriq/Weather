@@ -7,7 +7,6 @@
 //
 
 #import "YTMainVC.h"
-#import "YTDBManager.h"
 #import "YTMRDBManager.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"

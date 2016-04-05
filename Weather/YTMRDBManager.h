@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <MagicalRecord/MagicalRecord.h>
 #import "YTCurrentWeatherModel.h"
+#import "YTForecastWeatherModel.h"
 #import "CurrentWeather.h"
+#import "ForecastWeather.h"
 
 @interface YTMRDBManager : NSObject
 
@@ -17,5 +19,8 @@
 
 -(CurrentWeather*) saveAndUpdateCurrentWeatherForToday: (YTCurrentWeatherModel*) model;
 -(CurrentWeather*) getCurrentWeatherForToday;
+-(NSArray*) saveAndUpdateForecastWeather: (NSArray*) models;
+-(NSArray*) getForecastWeatherFromDate: (NSDate*) dateFrom;
+-(NSArray*) getAverageForecastStatisticsForLastThreeMonths;
 
 @end

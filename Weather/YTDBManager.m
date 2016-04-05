@@ -108,7 +108,6 @@
 }
 
 - (void) removeOldForecastWeather: (NSArray *) data {
-    
     //  Delete
     for (id object in data) {
         [self.managedObjectContext deleteObject:object];
@@ -122,36 +121,38 @@
 
 - (NSArray*) getAverageForecastStatisticsForLastThreeMonths {
     
-//    NSDate *startToday = [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]];
-//    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-//    [dateComponents setMonth: -3];
-//    NSDate *threeMothsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:startToday options:0];
+    NSDate *startToday = [[YTDateHelper sharedHelper] getStartDayFromDate:[NSDate date]];
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setMonth: -3];
+    NSDate *threeMothsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:startToday options:0];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:[[ForecastWeather class] description] inManagedObjectContext:self.managedObjectContext];
-    NSExpression *groupByKey = [NSExpression expressionForKeyPath:@"orderDate"];
-    NSExpression *avgFunc = [NSExpression expressionForFunction:@"average:" arguments:@[groupByKey]];
-    NSExpressionDescription *calc = [[NSExpressionDescription alloc] init];
-    calc.name = @"temp";
-    calc.expression = avgFunc;
-    calc.expressionResultType = NSFloatAttributeType;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass([ForecastWeather class])
+                                              inManagedObjectContext:self.managedObjectContext];
+    NSExpression *averageExpression = [NSExpression expressionForFunction:@"average:"
+                                                                arguments:@[[NSExpression expressionForKeyPath:@"temp"]]];
+    NSExpressionDescription *average = [[NSExpressionDescription alloc] init];
+    average.name = @"average";
+    average.expression = averageExpression;
+    average.expressionResultType = NSFloatAttributeType;
+    
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entity];
+    request.entity = entity;
     request.propertiesToGroupBy = @[@"orderDate"];
-    request.propertiesToFetch = @[@"orderDate", calc];
+    request.propertiesToFetch = @[average, @"orderDate"];
     request.resultType = NSDictionaryResultType;
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderDate >= %@ AND orderDate < %@", threeMothsAgo, startToday];
-//    [request setPredicate:predicate];
-    NSSortDescriptor *dateSortDescr = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
-    [request setSortDescriptors:@[dateSortDescr]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderDate >= %@ AND orderDate < %@", threeMothsAgo, startToday];
+    [request setPredicate:predicate];
+
+    NSSortDescriptor *dateSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"orderDate" ascending:YES];
+    [request setSortDescriptors:@[dateSortDescriptor]];
     
-    NSError *errorReq = nil;
+    NSError *error = nil;
     NSArray *res = @[];
-    
-    if (!(res = [self.managedObjectContext executeFetchRequest:request error:&errorReq])) {
+    if (!(res = [self.managedObjectContext executeFetchRequest:request error:&error])) {
         res = @[];
-        NSLog(@"Error on fetch avg temp group by orderDate: %@", [errorReq localizedDescription]);
+        NSLog(@"Error on fetch avg temp group by orderDate: %@", [error localizedDescription]);
     }
-    
+
     return res;
 }
 

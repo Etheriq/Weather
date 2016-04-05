@@ -8,7 +8,7 @@
 
 #import "YTStatisticsVC.h"
 #import "BEMSimpleLineGraphView.h"
-#import "YTDBManager.h"
+#import "YTMRDBManager.h"
 #import "YTDateHelper.h"
 
 @interface YTStatisticsVC () <BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource>
@@ -30,8 +30,7 @@
                                               action:@selector(showMenuAction)
                                               ];
     
-    self.statResult = [[YTDBManager sharedManager] getAverageForecastStatisticsForLastThreeMonths];
-    
+    self.statResult = [[YTMRDBManager sharedManager] getAverageForecastStatisticsForLastThreeMonths];
     self.statsView.enableXAxisLabel = YES;
     self.statsView.enablePopUpReport = YES;
     self.statsView.enableTouchReport = YES;
@@ -71,7 +70,7 @@
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
     NSDictionary *currentStatInfo = [self.statResult objectAtIndex:index];
     
-    return [[currentStatInfo objectForKey:@"temp"] floatValue];
+    return [[currentStatInfo objectForKey:@"result"] floatValue];
 }
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
