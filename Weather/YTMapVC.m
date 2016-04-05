@@ -22,7 +22,7 @@
     GMSMapView *mapView_;
     GMSPlacesClient *placeClient_;
     NSString *infoPlace;
-    NSDictionary *currentWeatherInfo;
+    YTCurrentWeatherModel *currentWeatherInfo;
 }
 
 - (void)viewDidLoad {
@@ -34,10 +34,11 @@
                                               target:self
                                               action:@selector(showMenuAction)
                                               ];
+    [self initMap];
 //    placeClient_ = [GMSPlacesClient sharedClient];
 }
 
--(void) loadView {
+-(void) initMap {
     CLLocation *location = [[YTLocationManager sharedManager] updateLocation];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.coordinate.latitude
                                                             longitude:location.coordinate.longitude
@@ -97,25 +98,18 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:marker.position.latitude longitude:marker.position.longitude];
     
     if (currentWeatherInfo == nil) {
-        [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:location onSuccess:^(NSDictionary *data) {
-            currentWeatherInfo = data;
+        [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:location onSuccess:^(YTCurrentWeatherModel *model) {
+            currentWeatherInfo = model;
             [mapView_ setSelectedMarker:marker];
         } onFailure:nil];
     } else {
-        infoWindow.placeNameLabel.text = [currentWeatherInfo objectForKey:@"name"];
-        infoWindow.tempLabel.text = [NSString stringWithFormat:@"%.0f °C", [[currentWeatherInfo objectForKey:@"temp"] floatValue]];
-        infoWindow.humidityLabel.text = [NSString stringWithFormat:@"Humidity: %li %%", [[currentWeatherInfo objectForKey:@"humidity"] integerValue]];
-        infoWindow.pressureLabel.text = [NSString stringWithFormat:@"Pressure: %.1f hPa", [[currentWeatherInfo objectForKey:@"pressure"] floatValue]];
-        infoWindow.windSpeedLabel.text = [NSString stringWithFormat:@"Wind speed: %li m/s", [[currentWeatherInfo objectForKey:@"speed"] integerValue]];
-        
-        NSTimeInterval intervalSunrise = [[currentWeatherInfo objectForKey:@"sunrise"] integerValue];
-        NSDate *sunrise = [NSDate dateWithTimeIntervalSince1970:intervalSunrise];
-        
-        NSTimeInterval intervalSunset = [[currentWeatherInfo objectForKey:@"sunset"] integerValue];
-        NSDate *sunset = [NSDate dateWithTimeIntervalSince1970:intervalSunset];
-        
-        infoWindow.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:sunrise withFormat:@"kk:mm"]];
-        infoWindow.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:sunset withFormat:@"kk:mm"]];
+        infoWindow.placeNameLabel.text = currentWeatherInfo.name;
+        infoWindow.tempLabel.text = [NSString stringWithFormat:@"%.0f °C", currentWeatherInfo.temp];
+        infoWindow.humidityLabel.text = [NSString stringWithFormat:@"Humidity: %i %%", currentWeatherInfo.humidity];
+        infoWindow.pressureLabel.text = [NSString stringWithFormat:@"Pressure: %.1f hPa", currentWeatherInfo.pressure];
+        infoWindow.windSpeedLabel.text = [NSString stringWithFormat:@"Wind speed: %i m/s", currentWeatherInfo.speed];
+        infoWindow.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:currentWeatherInfo.sunrise withFormat:@"kk:mm"]];
+        infoWindow.sunsetLabel.text = [NSString stringWithFormat:@"Sunset: %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:currentWeatherInfo.sunset withFormat:@"kk:mm"]];
     }
     if (infoPlace == nil) {
         [[YTGoogleGeocodeManager sharedManager] getGeocodeInformationByCoordinates:location onSuccess:^(NSString *geoInfo) {

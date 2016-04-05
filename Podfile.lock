@@ -16,18 +16,26 @@ PODS:
     - AFNetworking/NSURLSession
   - BEMSimpleLineGraph (4.1)
   - GoogleMaps (1.12.3)
+  - JSONModel (1.2.0)
   - KVNProgress (2.2.4)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
 
 DEPENDENCIES:
   - AFNetworking
   - BEMSimpleLineGraph
   - GoogleMaps
+  - JSONModel
   - KVNProgress
+  - MagicalRecord
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BEMSimpleLineGraph: 44fd451f27f8e9cf96f2da5bea27603093576dd1
   GoogleMaps: a4ac67918d0b5ba5f6b9893ac80487e357779e6c
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   KVNProgress: 541edcea5a1fef592aceac8d791a410d38cb499d
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
 
 COCOAPODS: 0.39.0

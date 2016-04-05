@@ -7,7 +7,7 @@
 //
 
 #import "YTMainVC.h"
-#import "YTDBManager.h"
+#import "YTMRDBManager.h"
 #import "YTRequestManager.h"
 #import "YTLocationManager.h"
 #import "YTGoogleGeocodeManager.h"
@@ -36,7 +36,7 @@
     
     [[YTLocationManager sharedManager] updateLocation];
     
-    CurrentWeather* currentWeather = [[YTDBManager sharedManager] getCurrentWeatherForToday];
+    CurrentWeather* currentWeather = [[YTMRDBManager sharedManager] getCurrentWeatherForToday];
     if (currentWeather != nil) {
         [self updateMainView:currentWeather];
         NSLog(@"loaded from DB");
@@ -52,16 +52,16 @@
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
 
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    //UIGraphicsBeginImageContext(newSize);
-    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
-    // Pass 1.0 to force exact pixel size.
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
+//+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+//    //UIGraphicsBeginImageContext(newSize);
+//    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+//    // Pass 1.0 to force exact pixel size.
+//    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+//    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return newImage;
+//}
 
 #pragma mark - Private methods
 
@@ -87,13 +87,13 @@
 - (void) refreshView {
     
     CLLocation* coord = [[YTLocationManager sharedManager] updateLocation];
-    NSLog(@"Coordinates: lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
+//    NSLog(@"Coordinates: lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
     
     [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord
-       onSuccess:^(NSDictionary *data) {
+       onSuccess:^(YTCurrentWeatherModel *dataModel) {
            
-           CurrentWeather* currentWeather = [[YTDBManager sharedManager] updateCurrentWeatherForToday:data];
-           [self updateMainView:currentWeather];           
+           CurrentWeather *currentWeather = [[YTMRDBManager sharedManager] saveAndUpdateCurrentWeatherForToday:dataModel];
+           [self updateMainView:currentWeather];
        }
        onFailure:^(NSError *error, NSInteger statusCode) {
            NSLog(@"%@", [error localizedDescription]);
@@ -104,7 +104,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.cityLabel.text = [NSString stringWithFormat:@"%@", info];
         });
-        NSLog(@"current city is %@", info);
+//        NSLog(@"current city is %@", info);
     } onFailure:nil];
 }
 

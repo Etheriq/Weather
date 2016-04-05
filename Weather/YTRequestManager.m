@@ -46,58 +46,8 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
 
 #pragma mark - Weather API methods
 
-- (void) getCurrentWeatherDataByCity:(NSString*) city onSuccess:(void(^)(NSDictionary* data)) success onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
- 
-    NSDictionary* params = @{
-                             @"units": @"metric",
-                             @"appid": apikey,
-                             @"q": city
-                         };
-    
-    [self.sessionManager GET:@"weather"
-                    parameters:params
-                    progress:^(NSProgress * downloadProgress) {}
-                    success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
-                        if (success) {
-                            success(responseObject);
-                        }
-                    }
-                    failure:^(NSURLSessionDataTask* task, NSError* error) {
-                        if (failure) {
-                            failure(error, 404);
-                        }
-                    }
-     ];
-}
-
-- (void) getForecastWeatherByCity:(NSString*) city
-                        onSuccess:(void(^)(NSDictionary* data)) success
-                        onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
-    NSDictionary* params = @{
-                             @"units": @"metric",
-                             @"appid": apikey,
-                             @"q": city
-                            };
-    
-    [self.sessionManager GET:@"forecast/weather"
-                  parameters:params
-                    progress:^(NSProgress * downloadProgress) {}
-                     success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
-                         if (success) {
-                             
-                             success(responseObject);
-                         }
-                     }
-                     failure:^(NSURLSessionDataTask* task, NSError* error) {
-                         if (failure) {
-                             failure(error, 404);
-                         }
-                     }
-     ];
-}
-
 - (void) getCurrentWeatherDataByCoordinates:(CLLocation*) location
-                                  onSuccess:(void(^)(NSDictionary* data)) success
+                                  onSuccess:(void(^)(YTCurrentWeatherModel* model)) success
                                   onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
     NSDictionary* params = @{
                              @"units": @"metric",
@@ -111,23 +61,14 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                     progress:^(NSProgress * downloadProgress) {}
                      success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
                          if (success) {
-//                             NSLog(@"%@", responseObject);
                              if ([responseObject[@"cod"] integerValue] == 200) {
-                                 NSDictionary* response = @{
-                                                            @"temp": responseObject[@"main"][@"temp"] ? responseObject[@"main"][@"temp"] : @"0",                    // температура в градусах цельсия
-                                                            @"pressure": responseObject[@"main"][@"pressure"] ? responseObject[@"main"][@"pressure"] : @"0",        // давление в hPa
-                                                            @"humidity": responseObject[@"main"][@"humidity"] ? responseObject[@"main"][@"humidity"] : @"0",        // влажность в %
-                                                            @"speed": responseObject[@"wind"][@"speed"] ? responseObject[@"wind"][@"speed"] : @"0",                 // скорость ветра в м/с
-                                                            @"deg": responseObject[@"wind"][@"deg"] ? responseObject[@"wind"][@"deg"] : @"0",                       // направление ветра в градусах
-                                                            @"icon": responseObject[@"weather"][0][@"icon"] ? responseObject[@"weather"][0][@"icon"] : @"01d",      // иконка
-                                                            @"description": responseObject[@"weather"][0][@"description"],                                          // описание погоды
-                                                            @"sunrise": responseObject[@"sys"][@"sunrise"] ? responseObject[@"sys"][@"sunrise"] : @"1451606400",    // восход в timestamp
-                                                            @"sunset": responseObject[@"sys"][@"sunset"] ? responseObject[@"sys"][@"sunset"] : @"1451606400",       // закат в timestamp
-                                                            @"name": responseObject[@"name"] ? responseObject[@"name"] : @"Narnia",                                 // название местности
-                                                            @"lat": params[@"lat"],
-                                                            @"lng": params[@"lon"]
-                                                        };
-                                 success(response);
+                                 
+                                 NSError *err = nil;
+                                 YTCurrentWeatherModel *currentWeatherModel = [[YTCurrentWeatherModel alloc] initWithDictionary:responseObject error:&err];
+                                 currentWeatherModel.latitude = location.coordinate.latitude;
+                                 currentWeatherModel.longitude = location.coordinate.longitude;
+
+                                 success(currentWeatherModel);
                              } else {
                                  NSError* error = [[NSError alloc] initWithDomain:@"openweathermap API error" code:100 userInfo:nil];
                                  if (failure) {
@@ -160,32 +101,18 @@ static NSString* baseUrl = @"http://api.openweathermap.org/data/2.5/";
                     progress:^(NSProgress * downloadProgress) {}
                      success:^(NSURLSessionDataTask* task, NSDictionary* responseObject) {
                          if (success) {
-//                             NSLog(@"%@", responseObject);
                              if ([responseObject[@"cod"] integerValue] == 200) {
                                  
                                  NSArray *resultList = responseObject[@"list"];
-                                 NSString *name = responseObject[@"city"][@"name"] ? responseObject[@"city"][@"name"] : @"Narnia";
-                                 NSMutableArray *response = [NSMutableArray array];
-
-                                 for (NSDictionary *currentListItem in resultList) {
-                                     NSDictionary *responseTmp = @{
-                                                                   @"temp": currentListItem[@"main"][@"temp"] ? currentListItem[@"main"][@"temp"] : @"0",                    // температура в градусах цельсия
-                                                                   @"pressure": currentListItem[@"main"][@"pressure"] ? currentListItem[@"main"][@"pressure"] : @"0",        // давление в hPa
-                                                                   @"humidity": currentListItem[@"main"][@"humidity"] ? currentListItem[@"main"][@"humidity"] : @"0",        // влажность в %
-                                                                   @"speed": currentListItem[@"wind"][@"speed"] ? currentListItem[@"wind"][@"speed"] : @"0",                 // скорость ветра в м/с
-                                                                   @"deg": currentListItem[@"wind"][@"deg"] ? currentListItem[@"wind"][@"deg"] : @"0",                       // направление ветра в градусах
-                                                                   @"icon": currentListItem[@"weather"][0][@"icon"] ? currentListItem[@"weather"][0][@"icon"] : @"01d",      // иконка
-                                                                   @"description": currentListItem[@"weather"][0][@"description"],                                           // описание погоды
-                                                                   @"name": name,                                                                                            // название местности
-                                                                   @"lat": params[@"lat"],
-                                                                   @"lng": params[@"lon"],
-                                                                   @"fromDate": currentListItem[@"dt"] ? currentListItem[@"dt"] : @"1451606400"
-                                                                };
-                                     
-                                     [response addObject:responseTmp];
-                                 }
                                  
-                                 success(response);
+                                 NSError *err = nil;
+                                 NSArray* arrayModels = [YTForecastWeatherModel arrayOfModelsFromDictionaries:[YTForecastWeatherModel arrayOfDictionariesFromResponse:resultList andParams:@{
+                                                                                                                                        @"name": responseObject[@"city"][@"name"] ? responseObject[@"city"][@"name"] : @"Narnia",
+                                                                                                                                        @"lat": params[@"lat"],
+                                                                                                                                        @"lon": params[@"lon"]
+                                                                                                                                    }] error:&err];
+                                 
+                                 success(arrayModels);
                              } else {
                                  NSError* error = [[NSError alloc] initWithDomain:@"openweathermap API error" code:100 userInfo:nil];
                                  if (failure) {

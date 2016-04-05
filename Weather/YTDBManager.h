@@ -23,7 +23,7 @@
 + (YTDBManager *) sharedManager;
 
 - (CurrentWeather*) updateCurrentWeatherForToday: (NSDictionary*) data;
-- (nullable CurrentWeather*) getCurrentWeatherForToday;
+- (CurrentWeather*) getCurrentWeatherForToday;
 - (NSArray*) updateForecastWeather: (NSArray*) data;
 - (NSArray*) getForecastWeatherFromDate: (NSDate*) dateFrom;
 - (NSArray*) getAverageForecastStatisticsForLastThreeMonths;
