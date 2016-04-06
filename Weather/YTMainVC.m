@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *sunriseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (strong, nonatomic) UIRefreshControl *refreshControll;
 
 @end
 
@@ -32,8 +35,6 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshView)];
-    
     [[YTLocationManager sharedManager] updateLocation];
     
     CurrentWeather* currentWeather = [[YTMRDBManager sharedManager] getCurrentWeatherForToday];
@@ -43,6 +44,10 @@
     } else {
         NSLog(@"NOT loaded from DB");
     }
+    
+    self.refreshControll = [[UIRefreshControl alloc] init];
+    [self.refreshControll addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.scrollView addSubview:self.refreshControll];
     
 //    UIGraphicsBeginImageContext(self.view.frame.size);
 //    [[UIImage imageNamed:@"image.png"] drawInRect:self.view.bounds];
@@ -107,5 +112,25 @@
 //        NSLog(@"current city is %@", info);
     } onFailure:nil];
 }
+
+#pragma mark - UIScrollView refresh
+
+- (void)refresh:(UIRefreshControl *)refreshControl
+{
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing data..."];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self refreshView];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *lastUpdate = [NSString stringWithFormat:@"Last updated on %@", [[YTDateHelper sharedHelper] getFormattedDateStringFromDate:[NSDate date] withFormat:@"d MMM, kk:mm"]];
+            refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:lastUpdate];
+            
+            [refreshControl endRefreshing];
+        });
+    });
+}
+
 
 @end
