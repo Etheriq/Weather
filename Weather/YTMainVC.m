@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControll;
 
@@ -49,12 +50,6 @@
     [self.refreshControll addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.scrollView addSubview:self.refreshControll];
     
-//    UIGraphicsBeginImageContext(self.view.frame.size);
-//    [[UIImage imageNamed:@"image.png"] drawInRect:self.view.bounds];
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 }
 
 //+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {

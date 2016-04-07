@@ -108,7 +108,8 @@
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     [dateComponents setMonth: -1];
     NSDate *threeMothsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:startToday options:0];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderDate >= %@ AND orderDate < %@", threeMothsAgo, startToday];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderDate >= %@ AND orderDate < %@", threeMothsAgo, startToday];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderDate >= %@", threeMothsAgo];
       
     return [ForecastWeather MR_aggregateOperation:@"average:" onAttribute:@"temp" withPredicate:predicate groupBy:@"orderDate" inContext:self.context];
 }
