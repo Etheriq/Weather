@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uv5-SJ-yfa">
-                                        <rect key="frame" x="0.0" y="-40" width="375" height="598"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwI-9U-1hG">
                                                 <rect key="frame" x="18" y="24" width="43" height="75"/>
@@ -78,25 +78,37 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Presure:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocv-Uv-X3l">
+                                                <rect key="frame" x="18" y="195" width="349" height="18"/>
+                                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="Ocv-Uv-X3l" secondAttribute="trailing" constant="10" id="12Q-FS-wtO"/>
                                             <constraint firstItem="bT1-cM-NZn" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="2IU-I9-Wu7"/>
+                                            <constraint firstItem="Ocv-Uv-X3l" firstAttribute="top" secondItem="Pob-R9-99k" secondAttribute="bottom" constant="12" id="2qM-Ep-sIY"/>
                                             <constraint firstItem="zwI-9U-1hG" firstAttribute="top" secondItem="Uv5-SJ-yfa" secondAttribute="topMargin" constant="16" id="4j7-TY-Hq2"/>
                                             <constraint firstItem="Cyp-68-HfP" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="68B-YW-bax"/>
-                                            <constraint firstItem="bT1-cM-NZn" firstAttribute="top" secondItem="Pob-R9-99k" secondAttribute="bottom" constant="38" id="7TP-SE-JC1"/>
+                                            <constraint firstItem="bT1-cM-NZn" firstAttribute="top" secondItem="Pob-R9-99k" secondAttribute="bottom" constant="10" id="7TP-SE-JC1"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="dNV-Xo-UON" secondAttribute="trailing" constant="10" id="8d7-v2-kD3"/>
                                             <constraint firstItem="qsi-Sr-rSy" firstAttribute="top" secondItem="Tvl-xe-8KT" secondAttribute="bottom" constant="10" id="Bcx-ZS-6el"/>
                                             <constraint firstItem="dNV-Xo-UON" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="FDN-by-d2Z"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ocv-Uv-X3l" secondAttribute="trailing" constant="8" id="GSd-2B-kgK"/>
                                             <constraint firstItem="Tvl-xe-8KT" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="Gof-lj-AIb"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Tvl-xe-8KT" secondAttribute="trailing" constant="10" id="MdO-tO-Jgq"/>
                                             <constraint firstItem="Cyp-68-HfP" firstAttribute="top" secondItem="dNV-Xo-UON" secondAttribute="bottom" constant="10" id="Olw-xg-BhU"/>
+                                            <constraint firstItem="bT1-cM-NZn" firstAttribute="top" secondItem="Ocv-Uv-X3l" secondAttribute="bottom" constant="8" id="P8X-w1-OnF"/>
                                             <constraint firstItem="Pob-R9-99k" firstAttribute="top" secondItem="Cyp-68-HfP" secondAttribute="bottom" constant="10" id="POi-XB-ZWv"/>
                                             <constraint firstItem="M4G-rf-JWa" firstAttribute="leading" secondItem="zwI-9U-1hG" secondAttribute="trailing" constant="5" id="S9c-gF-WAp"/>
+                                            <constraint firstItem="Ocv-Uv-X3l" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="2" id="TIB-hD-Nxr"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="Pob-R9-99k" secondAttribute="trailing" constant="10" id="Wlv-0D-K60"/>
                                             <constraint firstItem="zwI-9U-1hG" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="gTB-SE-7mq"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="bT1-cM-NZn" secondAttribute="trailing" constant="10" id="i7o-zI-Zqc"/>
                                             <constraint firstItem="Pob-R9-99k" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="rBl-QW-fOT"/>
+                                            <constraint firstItem="Ocv-Uv-X3l" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leading" constant="18" id="rCq-7c-QBm"/>
                                             <constraint firstItem="qsi-Sr-rSy" firstAttribute="leading" secondItem="Uv5-SJ-yfa" secondAttribute="leadingMargin" constant="10" id="uib-MR-gsr"/>
                                             <constraint firstItem="Tvl-xe-8KT" firstAttribute="top" secondItem="bT1-cM-NZn" secondAttribute="bottom" constant="10" id="wVO-vX-Ira"/>
                                             <constraint firstItem="M4G-rf-JWa" firstAttribute="top" secondItem="Uv5-SJ-yfa" secondAttribute="topMargin" constant="20" id="wbY-66-gdO"/>
@@ -104,16 +116,23 @@
                                             <constraint firstItem="dNV-Xo-UON" firstAttribute="top" secondItem="zwI-9U-1hG" secondAttribute="bottom" constant="10" id="yAh-aD-NX2"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="qsi-Sr-rSy" secondAttribute="trailing" constant="10" id="zbn-ME-yLN"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="12Q-FS-wtO"/>
+                                                <exclude reference="TIB-hD-Nxr"/>
+                                                <exclude reference="7TP-SE-JC1"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Uv5-SJ-yfa" firstAttribute="width" secondItem="L2r-pc-MbI" secondAttribute="width" id="14X-eE-8wK"/>
                                     <constraint firstItem="Uv5-SJ-yfa" firstAttribute="leading" secondItem="L2r-pc-MbI" secondAttribute="leading" id="SbY-vP-2Vb"/>
-                                    <constraint firstItem="Uv5-SJ-yfa" firstAttribute="height" secondItem="L2r-pc-MbI" secondAttribute="height" constant="-5" id="UH3-xT-FiV"/>
+                                    <constraint firstItem="Uv5-SJ-yfa" firstAttribute="height" secondItem="L2r-pc-MbI" secondAttribute="height" id="UH3-xT-FiV"/>
                                     <constraint firstAttribute="trailing" secondItem="Uv5-SJ-yfa" secondAttribute="trailing" id="fa4-qA-16K"/>
                                     <constraint firstAttribute="bottom" secondItem="Uv5-SJ-yfa" secondAttribute="bottom" id="p8E-Th-ysL"/>
                                     <constraint firstItem="Uv5-SJ-yfa" firstAttribute="width" secondItem="L2r-pc-MbI" secondAttribute="width" id="rvV-LL-8El"/>
-                                    <constraint firstItem="Uv5-SJ-yfa" firstAttribute="top" secondItem="L2r-pc-MbI" secondAttribute="top" constant="-40" id="uBo-za-tWs"/>
+                                    <constraint firstItem="Uv5-SJ-yfa" firstAttribute="top" secondItem="L2r-pc-MbI" secondAttribute="top" id="uBo-za-tWs"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -138,6 +157,7 @@
                         <outlet property="contentView" destination="Uv5-SJ-yfa" id="bfa-3E-j9a"/>
                         <outlet property="descriptionLabel" destination="dNV-Xo-UON" id="Upf-HJ-5e2"/>
                         <outlet property="humidityLabel" destination="Pob-R9-99k" id="WsO-2f-Zdg"/>
+                        <outlet property="pressureLabel" destination="Ocv-Uv-X3l" id="ANu-62-L3n"/>
                         <outlet property="scrollView" destination="L2r-pc-MbI" id="Rbf-mR-iYP"/>
                         <outlet property="speedLabel" destination="bT1-cM-NZn" id="ZUn-qF-jHM"/>
                         <outlet property="sunriseLabel" destination="Tvl-xe-8KT" id="JbV-fY-wHd"/>

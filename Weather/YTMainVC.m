@@ -50,6 +50,9 @@
     [self.refreshControll addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.scrollView addSubview:self.refreshControll];
     
+    [self.scrollView setContentInset:UIEdgeInsetsMake(-63,0,0,0) ];
+    [self.scrollView setContentOffset:CGPointMake(0, 64)];
+    
 }
 
 //+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
