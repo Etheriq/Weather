@@ -49,10 +49,6 @@
     self.refreshControll = [[UIRefreshControl alloc] init];
     [self.refreshControll addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.scrollView addSubview:self.refreshControll];
-    
-    [self.scrollView setContentInset:UIEdgeInsetsMake(-63,0,0,0) ];
-    [self.scrollView setContentOffset:CGPointMake(0, 64)];
-    
 }
 
 //+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
@@ -90,8 +86,6 @@
 - (void) refreshView {
     
     CLLocation* coord = [[YTLocationManager sharedManager] updateLocation];
-//    NSLog(@"Coordinates: lat = %.8f, lng = %.8f", coord.coordinate.latitude, coord.coordinate.longitude);
-    
     [[YTRequestManager sharedManager] getCurrentWeatherDataByCoordinates:coord
        onSuccess:^(YTCurrentWeatherModel *dataModel) {
            
@@ -107,7 +101,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.cityLabel.text = [NSString stringWithFormat:@"%@", info];
         });
-//        NSLog(@"current city is %@", info);
     } onFailure:nil];
 }
 
