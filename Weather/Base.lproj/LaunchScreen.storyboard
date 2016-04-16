@@ -20,42 +20,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhM-ec-nT2">
-                                <rect key="frame" x="16" y="50" width="288" height="55.5"/>
+                                <rect key="frame" x="16" y="50" width="288" height="56"/>
                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="50"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GH iOS 2016 Tarnavskiy Yuriy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wla-cT-fxI">
                                 <rect key="frame" x="16" y="530" width="288" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Weather-splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="I01-uU-rOw">
-                                <rect key="frame" x="32" y="113" width="256" height="341"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="mnN-XG-Ct2">
+                                <rect key="frame" x="32" y="114" width="256" height="341"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.64811027489947648" green="0.64811027489947648" blue="0.64811027489947648" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="I01-uU-rOw" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1R6-0o-3ve"/>
                             <constraint firstItem="VhM-ec-nT2" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="4BK-FG-xRr"/>
+                            <constraint firstItem="mnN-XG-Ct2" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.6" id="4CH-zh-eEH"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="wla-cT-fxI" secondAttribute="bottom" constant="20" id="5dc-gW-ARa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="I01-uU-rOw" secondAttribute="trailing" constant="40" id="7zH-2D-Xe2"/>
+                            <constraint firstItem="mnN-XG-Ct2" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.8" id="B3f-lx-lUz"/>
                             <constraint firstItem="wla-cT-fxI" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="C1Z-pT-sbq"/>
-                            <constraint firstItem="I01-uU-rOw" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="40" id="DN8-HZ-unx"/>
-                            <constraint firstItem="I01-uU-rOw" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.8" id="bRo-de-PvQ"/>
-                            <constraint firstItem="I01-uU-rOw" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.6" id="bX2-gZ-j41"/>
+                            <constraint firstItem="mnN-XG-Ct2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Hm2-0H-Tlq"/>
+                            <constraint firstItem="mnN-XG-Ct2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XkM-Ii-wfk"/>
                             <constraint firstItem="VhM-ec-nT2" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="30" id="bdz-rW-5oZ"/>
                             <constraint firstItem="wla-cT-fxI" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="e5x-KO-Pag"/>
-                            <constraint firstItem="I01-uU-rOw" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mrC-NT-aIb"/>
                             <constraint firstItem="VhM-ec-nT2" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="v29-Km-4Lb"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7zH-2D-Xe2"/>
-                                <exclude reference="DN8-HZ-unx"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
@@ -65,6 +57,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Weather-splash.png" width="512" height="512"/>
+        <image name="splash.png" width="512" height="512"/>
     </resources>
 </document>

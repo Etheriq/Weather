@@ -13,6 +13,7 @@
 #import "YTGoogleGeocodeManager.h"
 #import "CurrentWeather.h"
 #import "YTDateHelper.h"
+#import "AVFoundation/AVFoundation.h"
 
 @interface YTMainVC()
 
@@ -26,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) AVAudioPlayer* player;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControll;
 
@@ -41,6 +43,14 @@
     CurrentWeather* currentWeather = [[YTMRDBManager sharedManager] getCurrentWeatherForToday];
     if (currentWeather != nil) {
         [self updateMainView:currentWeather];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:[self getSoundTypeByWeatherType:currentWeather.icon] ofType:@"mp3"];
+        NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:path];
+        
+        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileUrl error:nil];
+        [self.player setVolume:.4f];
+        [self.player play];
+        
         NSLog(@"loaded from DB");
     } else {
         NSLog(@"NOT loaded from DB");
@@ -63,6 +73,31 @@
 //}
 
 #pragma mark - Private methods
+
+-(NSString *) getSoundTypeByWeatherType: (NSString*) weatherType {
+    
+    NSString *fileName = nil;
+    
+    if ([weatherType isEqualToString:@"01d"] || [weatherType isEqualToString:@"01n"]) {
+        fileName = @"sunny";
+    } else if ([weatherType isEqualToString:@"02d"] || [weatherType isEqualToString:@"02n"]) {
+        fileName = @"wind";
+    } else if ([weatherType isEqualToString:@"03d"] || [weatherType isEqualToString:@"03n"]) {
+        fileName = @"wind";
+    } else if ([weatherType isEqualToString:@"04d"] || [weatherType isEqualToString:@"04n"]) {
+        fileName = @"wind";
+    } else if ([weatherType isEqualToString:@"09d"] || [weatherType isEqualToString:@"09n"]) {
+        fileName = @"rain";
+    } else if ([weatherType isEqualToString:@"10d"] || [weatherType isEqualToString:@"10n"]) {
+        fileName = @"rain";
+    } else if ([weatherType isEqualToString:@"11d"] || [weatherType isEqualToString:@"11n"]) {
+        fileName = @"thunder";
+    } else {
+        fileName = @"sunny";
+    }
+    
+    return fileName;
+}
 
 -(void) updateMainView:(CurrentWeather*) currentWeather {
     
