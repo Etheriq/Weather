@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  YTSideMenuVC.h
 //  Weather
 //
 //  Created by Yuriy T on 22.03.16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface YTSideMenuVC : UIViewController
 
 @end
-
